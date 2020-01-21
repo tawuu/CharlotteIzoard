@@ -4,14 +4,14 @@ const Loaders = require('./loaders')
 module.exports = class CharlotteClient extends Client {
     constructor(options = {}) {
         super(options)
-        this.inicializeLoaders()
+        this.initializeLoaders()
     }
     login (token) {
         super.login(token)
         return this;
     }
 
-    inicializeLoaders () {
+    initializeLoaders () {
         for (let name in Loaders) {
             try {
                 let Loader = new Loaders[name](this)

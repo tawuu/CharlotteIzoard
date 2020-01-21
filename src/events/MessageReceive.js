@@ -1,10 +1,31 @@
 const EventHandler = require('../structures/EventHandler');
+const CommandContext = require('../structures/command/CommandContext');
+const i18next = require('i18next')
 
 module.exports = class MessageReceive extends EventHandler {
     constructor(client) {
         super(client, 'message')
     }
     run (message) {
+        let prefix = '-'
+
+        if (message.author.bot || !message.content.startsWith(prefix)) return
         
+        let args = message.content.slice(prefix.length).trim().split(/ /g)
+        let commandname = args.shift().toLowerCase()
+        let cmd = this.client.commands.get(commandname) || this.client.commands.get(this.client.alias.get(commandname))
+        
+        let t;
+        const setFixedT = function (translate) { t = translate }
+        setFixedT(i18next.getFixedT('pt-BR'))
+
+        let commandctx = new CommandContext(this.client, { 
+            message,
+            prefix,
+            t
+        })
+
+        cmd._execute(commandctx, args)
+
     }
 }

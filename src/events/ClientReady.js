@@ -6,6 +6,7 @@ module.exports = class ClientOnReady extends EventHandler {
         super(client, 'ready')
     }
     run () {
+        
         console.log(`A super ${chalk.hex('#ff0ab1')('Charlotte')} está online`)
     }
 }
