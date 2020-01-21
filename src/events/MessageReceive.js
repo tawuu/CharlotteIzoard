@@ -7,7 +7,7 @@ module.exports = class MessageReceive extends EventHandler {
         super(client, 'message')
     }
     run (message) {
-        let prefix = '-'
+        let prefix = message.channel.type === "dm" ? '' : '-'
 
         if (message.author.bot || !message.content.startsWith(prefix)) return
         
