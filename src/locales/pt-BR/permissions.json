@@ -1,1 +1,6 @@
-{}
+{
+    "missingPermissions": "Você não tem permissão de `{{perms}}` para poder executar esse comando",
+    "onlyDevelopers": "Somente meus desenvolvedores tem permissão para executar este comando", 
+    "guildOnly": "Este comando só pode ser executado em servidores", 
+    "meWithoutPermission": "Eu estou sem permissão de "
+}

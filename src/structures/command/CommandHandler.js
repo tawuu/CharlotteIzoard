@@ -18,7 +18,7 @@ module.exports = class CommandHandler {
         try {
             handleRequirements(ctx, this.requirements)
         } catch(err) {
-            
+            ctx.reply(err.message)
         }
         
         

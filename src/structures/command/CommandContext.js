@@ -1,7 +1,6 @@
 module.exports = class CommandContext {
     constructor(client, options) {
         this.client = client;
-
         this.message = options.message;
         this.guild = options.message.guild;
         this.prefix = options.prefix;
@@ -10,7 +9,7 @@ module.exports = class CommandContext {
         this.voice = options.message.member;
         this.author = options.message.author;
         this.t = options.t
-        this.reply = (text, options) => options.channel.send(`${options.author.username}, ${text}`, options)
+        this.reply = (text, opt) => options.message.channel.send(`${options.message.author.username}, ${text}`, opt)
 
     }
 }
