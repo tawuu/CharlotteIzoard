@@ -11,6 +11,6 @@ module.exports = class CommandContext {
         this.t = options.t
         this.me = options.message.guild ? options.message.guild.members.get(this.client.user.id) : null
         this.reply = (text, opt) => options.message.channel.send(`**${options.message.author.username}**, ${text}`, opt)
-
+        
     }
 }
