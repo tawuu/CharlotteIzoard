@@ -1,5 +1,5 @@
 const CharlotteClient = require('./src/CharlotteClient');
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
 dotenv.config();
 
 const CHARLOTTE_OPTIONS = {
