@@ -8,10 +8,10 @@ module.exports = class ClientOnReady extends EventHandler {
     run () {
         console.log(`A super ${chalk.hex('#ff0ab1')('Charlotte')} está online`)
 
-        let arr = ['users', 'guilds', 'channels']
-        for (let a of arr) {
-            this.getAll(a)
-        }
+        // let arr = ['users', 'guilds', 'channels', "emojis"]
+        // for (let a of arr) {
+        //     this.getAll(a)
+        // }
     }
     getAll (name) {
         this.client.shard.broadcastEval('this.' + name)

@@ -6,6 +6,6 @@ const CHARLOTTE_OPTIONS = {
     disableEveryone: true,
 };
 
-const client = new CharlotteClient();
+const client = new CharlotteClient(CHARLOTTE_OPTIONS);
 
 client.login(process.env.token); // Inicializando a Charlotte ♥

@@ -6,6 +6,7 @@ module.exports = class EvalCommand extends CommandHandler {
         super(client, {
             name: 'eval',
             alias: [],
+            category: "devs",
             requirements: {
                 onlyDevs: true,
                 onlyGuild: false,
@@ -14,6 +15,7 @@ module.exports = class EvalCommand extends CommandHandler {
     }
     async execute ({guild, member, voice, channel, prefix, author, t}, args) {
         try {
+            const {Collection, MessageAttachment, MessageEmbed} = require('discord.js')
             const evaled = await eval(args.join(' ').replace(/(^`{3}(\w+)?|`{3}$)/g, ''))
             const cleanEvaled = this.clean(util.inspect(evaled, { depth: 0 }))
             await channel.send(cleanEvaled, { code: 'xl' })

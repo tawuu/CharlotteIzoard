@@ -6,13 +6,15 @@ module.exports = class CommandHandler {
             name,
             requirements = {},
             alias = [],
+            category = "util"
         } = options;
         this.name = name
         this.requirements = requirements
         this.alias = alias
+        this.category = category
         this.hidden = false
         this.client = client
-
+        this.dir = null
     }
     _execute (ctx, args) {
         try {

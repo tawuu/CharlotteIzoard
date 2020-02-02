@@ -14,7 +14,7 @@ module.exports = class MessageReceive extends EventHandler {
         let args = message.content.slice(prefix.length).trim().split(/ /g)
         let commandname = args.shift().toLowerCase()
         let cmd = this.client.commands.get(commandname) || this.client.commands.get(this.client.alias.get(commandname))
-        
+        if (!cmd) return;
         let t;
         const setFixedT = function (translate) { t = translate }
         setFixedT(i18next.getFixedT('pt-BR'))

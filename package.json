@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/ItzNerd/CharlotteIzoard#readme",
   "devDependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "extends-classes": "^1.0.5"
   },
   "dependencies": {
+    "canvas": "^2.6.1",
     "chalk": "^3.0.0",
     "discord.js": "github:discordjs/discord.js#master",
     "i18next": "^19.0.3",
