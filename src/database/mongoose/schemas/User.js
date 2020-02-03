@@ -1,16 +1,19 @@
 const { Schema } = require('mongoose');
 
-const banSchema = new Schema({
+const ban = {
     banned: {
         type: Boolean,
         default: false
     },
-    reason: String
-})
+    reason: {
+        type: String,
+        default: ""
+    }
+}
 
 module.exports = new Schema({
     _id: {
         type: String
     },
-    ban: banSchema
+    ban: ban
 });

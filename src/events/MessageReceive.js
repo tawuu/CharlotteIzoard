@@ -7,8 +7,7 @@ module.exports = class MessageReceive extends EventHandler {
         super(client, 'message')
     }
     async run (message) {
-        let prefix = '-';
-        if (message.channel.type === "dm") return;
+        let prefix = message.channel.type === "dm" ? "" : '-';
         if (message.author.bot) return;
         if (!message.content.startsWith(prefix)) return;
 
@@ -16,6 +15,12 @@ module.exports = class MessageReceive extends EventHandler {
         if (!user) {
             user = new this.client.database.users({
                 _id: message.author.id
+            }).save()
+        }
+        let bot = await this.client.database.me.findById(this.client.user.id);
+        if (!bot) {
+            bot = new this.client.database.me({
+                _id: this.client.user.id
             }).save()
         }
 
@@ -31,7 +36,8 @@ module.exports = class MessageReceive extends EventHandler {
             message,
             prefix,
             t,
-            user
+            user,
+            bot
         });
 
         cmd._execute(context, args)

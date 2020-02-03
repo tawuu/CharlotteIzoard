@@ -20,11 +20,14 @@ module.exports = class CommandHandler {
         try {
             handleRequirements(ctx, this.requirements)
         } catch(err) {
-            ctx.reply(err.message)
+            return ctx.reply(err.message)
         }
-        
-        
-        this.execute(ctx, args)
+
+        try {
+            this.execute(ctx, args)
+        } catch(err) {
+            return ctx.reply(err.message)
+        }
     }
     async execute () {}
 
