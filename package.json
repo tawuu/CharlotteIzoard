@@ -5,14 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ItzNerd/CharlotteIzoard.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "richaard5",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ItzNerd/CharlotteIzoard/issues"
