@@ -1,7 +1,7 @@
 const { Collection } = require('discord.js');
 const { readdirSync } = require('fs');
 const chalk = require('chalk');
-const database = require('../database/index');
+const { MongoDB } = require('../database');
 
 module.exports = class DatabaseLoader  {
     constructor(client) {
@@ -11,16 +11,22 @@ module.exports = class DatabaseLoader  {
 
     load () {
         try {
-            console.log(chalk.green("Database are initializing"))
-            this.initializeDatabase()
+            console.log(chalk.green("Database are initializing"));
+            this.initializeDatabase(MongoDB);
             return true
         } catch (err) {
             console.error(err)
         }
     }
 
-    initializeDatabase () {
-        this.client.database = database;
+    initializeDatabase (DBWrapper, options = {}) {
+        this.client.database = new DBWrapper(options);
+        this.client.database.startConnection()
+            .then(() => console.log('Connection was made to the database!'))
+            .catch(e => {
+                console.log(e.message);
+                this.client.database = null
+            });
     }
 
 }
