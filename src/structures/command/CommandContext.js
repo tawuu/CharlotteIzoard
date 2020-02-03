@@ -13,7 +13,7 @@ module.exports = class CommandContext {
         this.user = options.user;
         this.reply = (text, opt) => options.message.channel.send(`**${options.message.author.username}**, ${text}`, opt);
         this.dbBot = options.bot;
-
+        this.dbGuild = options.guild
         this.getUserAt = function (arg, guildOnly) {
 
             let args = options.message.content.slice(options.prefix.lenght).trim().split(/ +/g).slice(1)

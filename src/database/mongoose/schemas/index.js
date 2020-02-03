@@ -1,4 +1,5 @@
 module.exports = {
     User: require('./User'),
-    Bot: require('./Bot')
+    Bot: require('./Bot'),
+    Guild: require('./Guild')
 };
