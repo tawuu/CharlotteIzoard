@@ -1,0 +1,31 @@
+{
+    "ping": {
+        "response": ":ping_pong:! {{author}} | Atualmente estou com **{{ping}}ms**"
+    },
+    "tictactoe": {
+        "solicitation": "{{receiver}}, O usuario {{from}} enviou uma solicitação para jogar Jogo da Velha, você aceita ?",
+        "timeExpired": "Ops! Parece que o(a) {{user}} demorou muito para aceitar a solicitação de Jogo da Velha de {{from}}",
+        "accepted": "Parece que o {{user}} aceitou! Vamos começar o jogo {{from}}.",
+        "currentPlayer": "Está na vez de {{user}}",
+        "congradulations": ":tada: Parabéns!!!!",
+        "hasWinner": "Parabéns {{winner}}, você ganhou a partida!!! Que tal jogar mais ???",
+        "isEmpty": "O espaço indicado já está com uma jogada", 
+        "noWinnerMessage": "Ops! Parece que deu EMPATE! Não há nenhum vencedor",
+        "noHasWinner": "Deu Empate!",
+        "sendNumber": "Envie um numero no chat de acordo com a sua posição escolhida",
+        "missingUserMention": "Mencione um amigo para começar o jogo",
+        "invalidFriend": "Desculpe! Esse seu amigo é invalido"
+    },
+    "ban": {
+        "noReason": "Nenhum Motivo especificado por {{user}}",
+        "bannedSucessfully": "O usuario foi punido com sucesso !",
+        "cannotBanThisUser": "Eu não posso punir este usuário, meu cargo é menor que o do usuário a ser punido!",
+        "mentionUser": "Mencione um usuario para que eu possa punir!"
+    },
+    "kick": {
+        "noReason": "Nenhum Motivo especificado por {{user}}",
+        "kickedSucessfully": "O usuario foi punido com sucesso !",
+        "cannotKickThisUser": "Eu não posso punir este usuário, meu cargo é menor que o do usuário a ser punido!",
+        "mentionUser": "Mencione um usuario para que eu possa punir!"
+    }
+}
