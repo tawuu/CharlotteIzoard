@@ -9,6 +9,7 @@ module.exports = class MessageReceive extends EventHandler {
     }
     async run (message) {
         let prefix = this.client.user.username.toLowerCase().endsWith("canary") ? "c-" : '-';
+        if (message.channel.type === "dm") return;
         if (message.author.bot) return;
         if (!message.content.startsWith(prefix)) return;
 
@@ -24,17 +25,13 @@ module.exports = class MessageReceive extends EventHandler {
                 _id: message.author.id
             }).save()
         }
-        let guild;
-        if (message.channel instanceof GuildChannel) {
-            guild = await this.client.database.guilds.findById(message.guild.id);
-            if (!guild) {
-                guild = new this.client.database.guilds({
-                    _id: message.guild.id
-                }).save()
-            }
-        } else {
-            guild = null
+        let guild = await this.client.database.guilds.findById(message.guild.id);
+        if (!guild) {
+            guild = new this.client.database.guilds({
+                _id: message.guild.id
+            }).save()
         }
+
 
         let args = message.content.slice(prefix.length).trim().split(/ /g);
         let command = args.shift().toLowerCase();
