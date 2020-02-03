@@ -16,7 +16,7 @@ module.exports = class HelpCommand extends CommandHandler {
         let HelpEmbed = new MessageEmbed()
             .setAuthor(author.tag, author.displayAvatarURL())
             .setTitle(t("help:myCommands"))
-            .addField(`🎮 ${t('help:moderation')}`, this.getCommands("games") || t("help:noCommands"))
+            .addField(`👮 ${t('help:moderation')}`, this.getCommands("games") || t("help:noCommands"))
             .addField(`⚙ ${t('help:utils')}`, this.getCommands("utils") || t("help:noCommands"))
             .addField(`🎮 ${t('help:videogame')}`, this.getCommands("games") || t("help:noCommands"))
             .setColor("RANDOM")

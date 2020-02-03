@@ -1,29 +1,39 @@
 const EventHandler = require('../structures/EventHandler');
 const CommandContext = require('../structures/command/CommandContext');
 const i18next = require('i18next');
+const { GuildChannel } = require("discord.js")
 
 module.exports = class MessageReceive extends EventHandler {
     constructor(client) {
         super(client, 'message')
     }
     async run (message) {
-        let prefix = message.channel.type === "dm" ? "" : '-';
+        let prefix = message.channel.type === "dm" ? "" : this.client.user.username.toLowerCase().endsWith("canary") ? "c-" : '-';
         if (message.author.bot) return;
         if (!message.content.startsWith(prefix)) return;
 
+        let bot = await this.client.database.me.findById(process.env.client_id);
+        if (!bot) {
+            bot = new this.client.database.me({
+                _id: process.env.client_id
+            }).save()
+        }
         let user = await this.client.database.users.findById(message.author.id);
         if (!user) {
             user = new this.client.database.users({
                 _id: message.author.id
             }).save()
         }
-        let bot = await this.client.database.me.findById(this.client.user.id);
-        if (!bot) {
-            bot = new this.client.database.me({
-                _id: this.client.user.id
-            }).save()
+        let guild = await this.client.database.guilds.findById(message.guild.id);
+        if (!guild) {
+            if (message.channel instanceof GuildChannel) {
+                guild = new this.client.database.guilds({
+                    _id: message.guild.id
+                }).save()
+            } else {
+                guild = null
+            }
         }
-
         let args = message.content.slice(prefix.length).trim().split(/ /g);
         let command = args.shift().toLowerCase();
         let cmd = this.client.commands.get(command) || this.client.commands.get(this.client.alias.get(command));
@@ -37,7 +47,8 @@ module.exports = class MessageReceive extends EventHandler {
             prefix,
             t,
             user,
-            bot
+            bot,
+            guild
         });
 
         cmd._execute(context, args)
