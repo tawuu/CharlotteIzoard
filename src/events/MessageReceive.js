@@ -1,7 +1,7 @@
 const EventHandler = require('../structures/EventHandler');
 const CommandContext = require('../structures/command/CommandContext');
 const i18next = require('i18next');
-const {DMChannel} = require("discord.js")
+const { GuildChannel } = require("discord.js")
 
 module.exports = class MessageReceive extends EventHandler {
     constructor(client) {
@@ -12,10 +12,10 @@ module.exports = class MessageReceive extends EventHandler {
         if (message.author.bot) return;
         if (!message.content.startsWith(prefix)) return;
 
-        let bot = await this.client.database.me.findById(this.client.user.id);
+        let bot = await this.client.database.me.findById(process.env.client_id);
         if (!bot) {
             bot = new this.client.database.me({
-                _id: this.client.user.id
+                _id: process.env.client_id
             }).save()
         }
         let user = await this.client.database.users.findById(message.author.id);
@@ -26,12 +26,12 @@ module.exports = class MessageReceive extends EventHandler {
         }
         let guild = await this.client.database.guilds.findById(message.guild.id);
         if (!guild) {
-            if (message.channel instanceof !DMChannel) {
+            if (message.channel instanceof GuildChannel) {
                 guild = new this.client.database.guilds({
                     _id: message.guild.id
                 }).save()
             } else {
-                console.log('n')
+                guild = null
             }
         }
         let args = message.content.slice(prefix.length).trim().split(/ /g);

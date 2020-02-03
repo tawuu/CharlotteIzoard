@@ -27,5 +27,14 @@
         "kickedSucessfully": "O usuario foi punido com sucesso !",
         "cannotKickThisUser": "Eu não posso punir este usuário, meu cargo é menor que o do usuário a ser punido!",
         "mentionUser": "Mencione um usuario para que eu possa punir!"
+    },
+    "mute": {
+        "mentionUser":"Mencione um usuario para que eu possa mutar!",
+        "unreason": "Nenhum motivo especificado",
+        "invalidTime": "Por favor, indique um tempo valido !",
+        "sayTheTime": "Indique por quanto tempo deseja mutar este usuario",
+        "maxTime":"Ops! O tempo maximo de mute é de 3 meses",
+        "mutedSucessfully": "O usuario foi mutado com sucesso !",
+        "cannotMute": "Não foi possivel mutar o usuario"
     }
 }
