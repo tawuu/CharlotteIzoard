@@ -8,7 +8,7 @@ module.exports = class MessageReceive extends EventHandler {
         super(client, 'message')
     }
     async run (message) {
-        let prefix = message.channel.type === "dm" ? "" : this.client.user.username.toLowerCase().endsWith("canary") ? "c-" : '-';
+        let prefix = this.client.user.username.toLowerCase().endsWith("canary") ? "c-" : '-';
         if (message.author.bot) return;
         if (!message.content.startsWith(prefix)) return;
 
@@ -24,16 +24,18 @@ module.exports = class MessageReceive extends EventHandler {
                 _id: message.author.id
             }).save()
         }
-        let guild = await this.client.database.guilds.findById(message.guild.id);
-        if (!guild) {
-            if (message.channel instanceof GuildChannel) {
+        let guild;
+        if (message.channel instanceof GuildChannel) {
+            guild = await this.client.database.guilds.findById(message.guild.id);
+            if (!guild) {
                 guild = new this.client.database.guilds({
                     _id: message.guild.id
                 }).save()
-            } else {
-                guild = null
             }
+        } else {
+            guild = null
         }
+
         let args = message.content.slice(prefix.length).trim().split(/ /g);
         let command = args.shift().toLowerCase();
         let cmd = this.client.commands.get(command) || this.client.commands.get(this.client.alias.get(command));

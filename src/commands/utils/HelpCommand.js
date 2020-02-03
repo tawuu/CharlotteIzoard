@@ -7,9 +7,7 @@ module.exports = class HelpCommand extends CommandHandler {
             name: 'help',
             alias: ['ajuda'],
             category: "utils",
-            requirements: {
-                onlyGuild: false,
-            }
+            requirements: {}
         })
     }
     async execute ({guild, member, voice, channel, prefix, author, t}, args) {

@@ -9,7 +9,6 @@ module.exports = class EvalCommand extends CommandHandler {
             category: "devs",
             requirements: {
                 onlyDevs: true,
-                onlyGuild: false,
             }
         })
     }
