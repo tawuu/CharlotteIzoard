@@ -1,7 +1,7 @@
 const EventHandler = require('../structures/EventHandler');
 const CommandContext = require('../structures/command/CommandContext');
 const i18next = require('i18next');
-const { GuildChannel } = require("discord.js")
+const CharlotteEmbed = require("../utils/CharlotteEmbed")
 
 module.exports = class MessageReceive extends EventHandler {
     constructor(client) {
@@ -47,7 +47,8 @@ module.exports = class MessageReceive extends EventHandler {
             t,
             user,
             bot,
-            guild
+            guild,
+            CharlotteEmbed
         });
 
         cmd._execute(context, args)
