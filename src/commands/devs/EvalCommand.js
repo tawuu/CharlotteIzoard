@@ -9,11 +9,10 @@ module.exports = class EvalCommand extends CommandHandler {
             category: "devs",
             requirements: {
                 onlyDevs: true,
-                onlyGuild: false,
             }
         })
     }
-    async execute ({guild, member, voice, channel, prefix, author, t, user, dbBot, dbGuild}, args) {
+    async execute ({guild, member, voice, channel, prefix, author, t, user, dbBot, dbGuild, CharlotteEmbed}, args) {
         try {
             const {Collection, MessageAttachment, MessageEmbed} = require('discord.js')
             const evaled = await eval(args.join(' ').replace(/(^`{3}(\w+)?|`{3}$)/g, ''))

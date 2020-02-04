@@ -1,14 +1,15 @@
 const EventHandler = require('../structures/EventHandler');
 const CommandContext = require('../structures/command/CommandContext');
 const i18next = require('i18next');
-const { GuildChannel } = require("discord.js")
+const CharlotteEmbed = require("../utils/CharlotteEmbed")
 
 module.exports = class MessageReceive extends EventHandler {
     constructor(client) {
         super(client, 'message')
     }
     async run (message) {
-        let prefix = message.channel.type === "dm" ? "" : this.client.user.username.toLowerCase().endsWith("canary") ? "c-" : '-';
+        let prefix = this.client.user.username.toLowerCase().endsWith("canary") ? "c-" : '-';
+        if (message.channel.type === "dm") return;
         if (message.author.bot) return;
         if (!message.content.startsWith(prefix)) return;
 
@@ -26,14 +27,12 @@ module.exports = class MessageReceive extends EventHandler {
         }
         let guild = await this.client.database.guilds.findById(message.guild.id);
         if (!guild) {
-            if (message.channel instanceof GuildChannel) {
-                guild = new this.client.database.guilds({
-                    _id: message.guild.id
-                }).save()
-            } else {
-                guild = null
-            }
+            guild = new this.client.database.guilds({
+                _id: message.guild.id
+            }).save()
         }
+
+
         let args = message.content.slice(prefix.length).trim().split(/ /g);
         let command = args.shift().toLowerCase();
         let cmd = this.client.commands.get(command) || this.client.commands.get(this.client.alias.get(command));
@@ -48,7 +47,8 @@ module.exports = class MessageReceive extends EventHandler {
             t,
             user,
             bot,
-            guild
+            guild,
+            CharlotteEmbed
         });
 
         cmd._execute(context, args)

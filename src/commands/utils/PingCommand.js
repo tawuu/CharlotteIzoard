@@ -6,9 +6,7 @@ module.exports = class PingCommand extends CommandHandler {
             name: 'ping',
             alias: [],
             category: "utils",
-            requirements: {
-                onlyGuild: false,
-            }
+            requirements: {}
         })
     }
     async execute ({guild, member, voice, channel, prefix, author, t}, args) {

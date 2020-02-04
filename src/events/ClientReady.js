@@ -8,6 +8,9 @@ module.exports = class ClientOnReady extends EventHandler {
     run () {
         console.log(`A super ${chalk.hex('#ff0ab1')('Charlotte')} está online`)
 
+        this.client.user.setActivity("Estou Online!!!", {
+            type: "WATCHING"
+        })
         // let arr = ['users', 'guilds', 'channels', "emojis"]
         // for (let a of arr) {
         //     this.getAll(a)
