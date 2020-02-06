@@ -42,5 +42,10 @@
         "createdBy": "Eu fui criada e desenvolvida por {{owners}}",
         "clickhere": "[Clique aqui]({{url}})",
         "aboutMe": "Olá, meu nome é **{{name}}** e eu sou somente mais um outro bot no discord... \n\nEu fui desenvolvida em **JavaScript**, utilizando a biblioteca **discord.js - {{version}}**, Eu fui criada por **{{owner}}**, eu tenho um total de **{{commands}}** comandos e atualmente eu conheco um total de **{{users}}** usuarios em um total de **{{servers}}** servidores "
+    },
+    "translate": {
+        "missingLanguage": "Indique uma linguagem qual você deseja traduzir",
+        "missingMessage": "Indique a mensagem qual você deseja traduzir",
+        "error": "Não consegui traduzir essa frase para este idioma..."
     }
 }
