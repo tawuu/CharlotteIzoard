@@ -9,6 +9,7 @@ module.exports = class EventLoader  {
         this.client = client
     }
 
+
     load () {
         try {
             console.log(chalk.green("Locales are initializing"))

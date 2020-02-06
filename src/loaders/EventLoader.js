@@ -6,11 +6,10 @@ module.exports = class EventLoader  {
     constructor(client) {
         this.client = client
     }
-
+    
     load () {
         try {
             console.log(chalk.green("Events are initializing"))
-            this.client.events = new Collection();
             this.initializeEvents()
             return true
         } catch (err) {
@@ -19,6 +18,7 @@ module.exports = class EventLoader  {
     }
     
     initializeEvents () {
+        this.client.events = new Collection();
         let eventsFiles = readdirSync('src/events')
         for (let file of eventsFiles) {
             const event = new(require('../events/'+file))(this.client)
