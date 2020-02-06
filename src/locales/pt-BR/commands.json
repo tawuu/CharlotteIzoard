@@ -50,5 +50,15 @@
     },
     "spotify": {
         "notListening": "O usuario não está escutando spotify"
+    },
+    "lock": {
+        "channelLockedSucessfully": "O canal foi fechado com sucesso !",
+        "channelAlreadyLocked": "O canal já está fechado!", 
+        "cannotLock": "Desculpe-me, não estou conseguindo fechar o canal!"
+    },
+    "unlock": {
+        "channelUnlockedSucessfully": "O canal foi aberto com sucesso !",
+        "channelAlreadyUnlocked": "O canal já está aberto!", 
+        "cannotUnlock": "Desculpe-me, não estou conseguindo abrir o canal!"
     }
 }
