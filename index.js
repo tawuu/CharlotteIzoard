@@ -7,7 +7,7 @@ dotenv.config();
 // Ela ta em uma host gratuita, então sim, eu preciso disso
 app.listen(process.env.PORT ? process.env.PORT : 3000)
 setInterval(() => {
-    require("http").get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`)
+    require("http").get(`http://${process.env.PROJECT_DOMAIN ? process.env.PROJECT_DOMAIN : "test"}.glitch.me/`)
 }, 30000)
 app.get("/", (req, res) => {
     res.status(200).send("OK")
