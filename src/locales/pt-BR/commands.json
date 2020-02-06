@@ -47,5 +47,8 @@
         "missingLanguage": "Indique uma linguagem qual você deseja traduzir",
         "missingMessage": "Indique a mensagem qual você deseja traduzir",
         "error": "Não consegui traduzir essa frase para este idioma..."
+    },
+    "spotify": {
+        "notListening": "O usuario não está escutando spotify"
     }
 }

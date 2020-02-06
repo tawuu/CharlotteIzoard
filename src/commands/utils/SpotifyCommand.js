@@ -67,7 +67,7 @@ module.exports = class SpotifyCommand extends CommandHandler {
             channel.send(new MessageAttachment(canvas.toBuffer(), "spotify.png"));
 
         } else {
-            reply("notListening")
+            reply(t("commands:spotify.notListening"))
         }
             
 
