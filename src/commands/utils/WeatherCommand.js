@@ -1,6 +1,6 @@
 const CommandHandler = require('../../structures/command/CommandHandler');
-const WeatherApi = require("../../apis/Weather")
-const templates = require("../../utils/Canvas/Templates")
+
+const { CanvasTemplates } = require("../../utils/")
 module.exports = class WeatherCommand extends CommandHandler {
     constructor(client) {
         super(client, {
@@ -12,8 +12,8 @@ module.exports = class WeatherCommand extends CommandHandler {
     }
     async execute({ guild, reply, channel, author, t, CharlotteEmbed }, args) {
         if (!args.join(" ")) return reply(t("commands:weather.missingCity"))
-        let result = await WeatherApi.getWeather(args.join("+"), t.lng)
-        let buffer = await templates.weather(result, t)
+        let result = await this.client.apis.Weather(args.join("+"), t.lng)
+        let buffer = await CanvasTemplates.weather(result, t)
 
         let WeatherEmbed = new CharlotteEmbed({
             image: {
