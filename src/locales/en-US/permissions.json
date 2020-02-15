@@ -1,0 +1,6 @@
+{
+    "missingPermissions": "You are not allowed to `{{perms}}` to be able to execute this command",
+    "onlyDevelopers": "Only my developers are allowed to run this command", 
+    "guildOnly": "This command can only be run on servers", 
+    "meWithoutPermission": "I am not allowed to `{{perms}}`"
+}

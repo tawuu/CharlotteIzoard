@@ -16,39 +16,18 @@ module.exports = class EventLoader  {
     load() {
         try {
             console.log(chalk.green("Locales are initializing"))
-            this.downloadLocalesFromGithub()
+            this.initializeLocales()
             return true
         } catch (err) {
             console.error(err)
         }
     }
 
-    downloadLocalesFromGithub() {
-        try {
-
-            for (let language of this.languages) {
-                for (let ns of this.ns) {
-                    fs.promises.mkdir(`src/locales/${language}`, { recursive: true }).then(() => {
-
-                        const file = createWriteStream(`src/locales/${language}/${ns}.json`);
-                        const request = http.get(`https://raw.githubusercontent.com/ItzNerd/CharlotteLocales/master/pt-BR/${ns}.json`, function(response) {
-                            response.pipe(file);
-                        });
-                    })
-                }
-            }
-        } catch (err) {
-            console.error(err)
-        } finally {
-            this.initializeLocales()
-            console.log(chalk.green("Locales are downloaded sucessfully"))
-        }
-    }
     async initializeLocales () {
         try {
             i18next.use(translationBackend).init({
                 ns: this.ns,
-                preload: readdirSync('./src/locales/'),
+                preload: await readdirSync('./src/locales/'),
                 fallbackLng: 'pt-BR',
                 backend: {
                     loadPath: `src/locales/{{lng}}/{{ns}}.json`
