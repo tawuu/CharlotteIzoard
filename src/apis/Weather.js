@@ -1,4 +1,4 @@
-module.exports.getWeather = function (search, lang = "pt-BR", degreeType = "C") {
+module.exports = function getWeather (search, lang = "pt-BR", degreeType = "C") {
     const request = require("request")
     let xml2JS = require("xml2js")
     let cheerio = require("cheerio")
