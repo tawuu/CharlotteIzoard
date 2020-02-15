@@ -16,17 +16,19 @@ module.exports = class EventLoader  {
             console.error(err)
         }
     }
-    
+
     initializeEvents () {
         this.client.events = new Collection();
         let eventsFiles = readdirSync('src/events')
         for (let file of eventsFiles) {
-            const event = new(require('../events/'+file))(this.client)
+            const event = new (require('../events/' + file))(this.client)
+            event.dir = `/events/${file}`
             this.client.events.set(event.name, event)
         }
         this.addListener()
     }
     addListener() {
+
         this.client.events.forEach(event => {
             this.client.on(event.name, (...args) => event.run(...args))
         });

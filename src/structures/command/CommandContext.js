@@ -9,7 +9,7 @@ module.exports = class CommandContext {
         this.voice = options.message.guild ? options.message.member.voice : null;
         this.author = options.message.author;
         this.t = options.t;
-        this.me = options.message.guild ? options.message.guild.members.get(this.client.user.id) : null;
+        this.me = options.message.guild ? options.message.guild.me : null;
         this.user = options.user;
         this.reply = (text, opt) => options.message.channel.send(`**${options.message.author.username}**, ${text}`, opt);
         this.dbBot = options.bot;

@@ -17,13 +17,14 @@ app.get("/", (req, res) => {
 
 const CHARLOTTE_OPTIONS = {
     disableEveryone: true,
-    fetchAllMembers: true
+    fetchAllMembers: true,
+    restRequestTimeout: 60000
 };
 
 
 
 // Inicializing Canvas Utils
-require("./src/utils/CanvasUtils").start()
+require("./src/utils/Canvas/CanvasUtils").start()
 
 
 const client = new CharlotteClient(CHARLOTTE_OPTIONS);

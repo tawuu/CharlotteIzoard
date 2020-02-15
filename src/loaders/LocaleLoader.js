@@ -1,5 +1,6 @@
-const { Collection } = require('discord.js');
-const { readdirSync } = require('fs');
+const { readdirSync, createWriteStream } = require('fs');
+const fs = require('fs');
+const http = require('https');
 const chalk = require('chalk')
 const i18next = require('i18next');
 const translationBackend = require('i18next-node-fs-backend');
@@ -7,25 +8,38 @@ const translationBackend = require('i18next-node-fs-backend');
 module.exports = class EventLoader  {
     constructor(client) {
         this.client = client
+        this.languages = ["pt-BR", "en-US"]
+        this.ns = ['commands', 'events', 'permissions', 'help']
     }
 
 
-    load () {
+    load() {
         try {
             console.log(chalk.green("Locales are initializing"))
-            this.initializeLocales()
+            this.downloadLocalesFromGithub()
             return true
         } catch (err) {
             console.error(err)
         }
     }
 
-    
+    downloadLocalesFromGithub() {
+        for (let language of this.languages) {
+            for (let ns of this.ns) {
+                fs.promises.mkdir(`src/locales/${language}`, { recursive: true })
+                const file = createWriteStream(`src/locales/${language}/${ns}.json`);
+                const request = http.get(`https://raw.githubusercontent.com/ItzNerd/CharlotteLocales/master/pt-BR/${ns}.json`, function(response) {
+                    response.pipe(file);
+                });
+            }
+        }
+        this.initializeLocales()
+    }
     async initializeLocales () {
         try {
             
             i18next.use(translationBackend).init({
-                ns: ['commands', 'events', 'permissions', 'help'],
+                ns: this.ns,
                 preload: await readdirSync('./src/locales/'),
                 fallbackLng: 'pt-BR',
                 backend: {
