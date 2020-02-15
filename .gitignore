@@ -1,5 +1,5 @@
-# /src/locales/*/*.json
-# src/locales/*
+/src/locales/*/*.json
+src/locales/*
 
 node_modules/
 .env
