@@ -48,7 +48,7 @@ module.exports = class EventLoader  {
         try {
             i18next.use(translationBackend).init({
                 ns: this.ns,
-                preload: await readdirSync('./src/locales/'),
+                preload: readdirSync('./src/locales/'),
                 fallbackLng: 'pt-BR',
                 backend: {
                     loadPath: `src/locales/{{lng}}/{{ns}}.json`

@@ -1,4 +1,6 @@
+# /src/locales/*/*.json
+# src/locales/*
+
 node_modules/
 .env
 .idea
-src/locales/*.json
