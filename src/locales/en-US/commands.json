@@ -70,6 +70,7 @@
         "vento": "Wind",
         "pontodeorvalho": "Dew point",
         "visibilidade": "Visibility",
-        "umidade": "Moisture"
+        "umidade": "Moisture",
+        "precipitacao": "Precipitation"
     }
 }

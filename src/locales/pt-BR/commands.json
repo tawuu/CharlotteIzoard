@@ -70,6 +70,7 @@
         "vento": "Vento",
         "pontodeorvalho": "Ponto de Orvalho",
         "visibilidade": "Visibilidade",
-        "umidade": "Umídade"
+        "umidade": "Umídade",
+        "precipitacao": "Precipitação"
     }
 }
