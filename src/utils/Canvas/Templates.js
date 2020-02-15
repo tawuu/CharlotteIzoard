@@ -27,7 +27,7 @@ module.exports = class Templates {
         
         
         ctx.fillText(`${t("commands:weather.sensacaotermica")}: ${weather.subinfo.sensacaotermica}°`, 150, 700)
-        ctx.fillText(`${t("commands:weather.precipitação")}: ${weather.precepitacao}`, 150, 790)
+        ctx.fillText(`${t("commands:weather.precipitacao")}: ${weather.precepitacao}`, 150, 790)
         ctx.fillText(`${t("commands:weather.barometro")}: ${weather.subinfo.barometro}`, 150, 880)
         ctx.fillText(`${t("commands:weather.vento")}: ${weather.subinfo.vento}`, 150, 970)
 
