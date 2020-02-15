@@ -1,0 +1,75 @@
+{
+    "ping": {
+        "response": ":ping_pong:! {{author}} | I'm currently with **{{ping}}ms**"
+    },
+    "tictactoe": {
+        "solicitation": "{{receiver}}, The user {{from}} sent a request to play Tic Tac Toe, do you accept ?",
+        "timeExpired": "Oops! It seems that the {{user}} delayed much for accept the solicitation in Tic Tac Toe in {{from}}",
+        "accepted": "It seems that the {{user}} accepted! Let's begin the game {{from}}.",
+        "currentPlayer": "It's time for {{user}}",
+        "congradulations": ":tada: Congratulations!!!!",
+        "hasWinner": "Congratulations {{winner}}, you won the match !!! How about playing more ???",
+        "isEmpty": "The space already indicated has an Play", 
+        "noWinnerMessage": "Oops! It seems that draw! No ha nenhum winner",
+        "noHasWinner": "gave draw!",
+        "sendNumber": "Send a number in the chat according to your chosen position",
+        "missingUserMention": "Mention a friend to start the game",
+        "invalidFriend": "Sorry! This friend of yours is invalid"
+    },
+    "ban": {
+        "noReason": "No Reason specified by {{user}}",
+        "bannedSucessfully": "The user has been successfully punished!",
+        "cannotBanThisUser": "I cannot punish this user, my position is less than that of the user to be punished!",
+        "mentionUser": "Mention a user so I can punish!"
+    },
+    "kick": {
+        "noReason": "No Reason specified by {{user}}",
+        "kickedSucessfully": "The user has been successfully punished!",
+        "cannotKickThisUser": "I cannot punish this user, my position is less than that of the user to be punished!",
+        "mentionUser": "Mention a user so I can punish!"
+    },
+    "mute": {
+        "mentionUser":"Mention a user so I can mutate!",
+        "unreason": "No reason specified",
+        "invalidTime": "Please indicate a valid time!",
+        "sayTheTime": "Indicate how long you want mute this user",
+        "maxTime":"Oops! Maximum mute time is 3 months",
+        "mutedSucessfully": "The user has been successfully mutated!",
+        "cannotMute": "It was not possible silence the user"
+    },
+    "botinfo": {
+        "myPrefix":"My prefix on this server is `{{prefix}}`",
+        "createdBy": "I was created and developed by {{owners}}",
+        "clickhere": "[click here]({{url}})",
+        "aboutMe": "Hello my name is **{{name}}** and I'm just another bot on discord... \n\nI was developed in **JavaScript**, using the library **discord.js - {{version}}**, I was raised by **{{owner}}**, i have a total of **{{commands}}** commands and currently I know a total of **{{users}}** users in a total of **{{servers}}** servers "
+    },
+    "translate": {
+        "missingLanguage": "Indicate a language you want to translate",
+        "missingMessage": "Indicate the message what you want to translate",
+        "error": "Sorry I couldn't translate that sentence into this language..."
+    },
+    "spotify": {
+        "notListening": "User is not listening to spotify"
+    },
+    "lock": {
+        "channelLockedSucessfully": "The server channel has been successfully closed!",
+        "channelAlreadyLocked": "The server channel is already closed!", 
+        "cannotLock": "Sorry-me, I'm not able to close the server channel"
+    },
+    "unlock": {
+        "channelUnlockedSucessfully": "The server channel has been successfully opened!",
+        "channelAlreadyUnlocked": "The server channel is now open!", 
+        "cannotUnlock": "Sorry-me, I'm not able to open the server channel!"
+    },
+    "weather": {
+        "missingCity": "Indicate the city you want to saw the weather",
+        "min": "Low",
+        "max": "High",
+        "sensacaotermica": "Thermal sensation",
+        "barometro": "Barometer",
+        "vento": "Wind",
+        "pontodeorvalho": "Dew point",
+        "visibilidade": "Visibility",
+        "umidade": "Moisture"
+    }
+}

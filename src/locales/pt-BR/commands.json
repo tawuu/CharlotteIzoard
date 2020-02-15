@@ -1,0 +1,75 @@
+{
+    "ping": {
+        "response": ":ping_pong:! {{author}} | Atualmente estou com **{{ping}}ms**"
+    },
+    "tictactoe": {
+        "solicitation": "{{receiver}}, O usuario {{from}} enviou uma solicitação para jogar Jogo da Velha, você aceita ?",
+        "timeExpired": "Ops! Parece que o(a) {{user}} demorou muito para aceitar a solicitação de Jogo da Velha de {{from}}",
+        "accepted": "Parece que o {{user}} aceitou! Vamos começar o jogo {{from}}.",
+        "currentPlayer": "Está na vez de {{user}}",
+        "congradulations": ":tada: Parabéns!!!!",
+        "hasWinner": "Parabéns {{winner}}, você ganhou a partida!!! Que tal jogar mais ???",
+        "isEmpty": "O espaço indicado já está com uma jogada", 
+        "noWinnerMessage": "Ops! Parece que deu EMPATE! Não há nenhum vencedor",
+        "noHasWinner": "Deu Empate!",
+        "sendNumber": "Envie um numero no chat de acordo com a sua posição escolhida",
+        "missingUserMention": "Mencione um amigo para começar o jogo",
+        "invalidFriend": "Desculpe! Esse seu amigo é invalido"
+    },
+    "ban": {
+        "noReason": "Nenhum Motivo especificado por {{user}}",
+        "bannedSucessfully": "O usuario foi punido com sucesso !",
+        "cannotBanThisUser": "Eu não posso punir este usuário, meu cargo é menor que o do usuário a ser punido!",
+        "mentionUser": "Mencione um usuario para que eu possa punir!"
+    },
+    "kick": {
+        "noReason": "Nenhum Motivo especificado por {{user}}",
+        "kickedSucessfully": "O usuario foi punido com sucesso !",
+        "cannotKickThisUser": "Eu não posso punir este usuário, meu cargo é menor que o do usuário a ser punido!",
+        "mentionUser": "Mencione um usuario para que eu possa punir!"
+    },
+    "mute": {
+        "mentionUser":"Mencione um usuario para que eu possa mutar!",
+        "unreason": "Nenhum motivo especificado",
+        "invalidTime": "Por favor, indique um tempo valido !",
+        "sayTheTime": "Indique por quanto tempo deseja mutar este usuario",
+        "maxTime":"Ops! O tempo maximo de mute é de 3 meses",
+        "mutedSucessfully": "O usuario foi mutado com sucesso !",
+        "cannotMute": "Não foi possivel mutar o usuario"
+    },
+    "botinfo": {
+        "myPrefix":"Meu prefixo neste servidor é `{{prefix}}`",
+        "createdBy": "Eu fui criada e desenvolvida por {{owners}}",
+        "clickhere": "[Clique aqui]({{url}})",
+        "aboutMe": "Olá, meu nome é **{{name}}** e eu sou somente mais um outro bot no discord... \n\nEu fui desenvolvida em **JavaScript**, utilizando a biblioteca **discord.js - {{version}}**, Eu fui criada por **{{owner}}**, eu tenho um total de **{{commands}}** comandos e atualmente eu conheco um total de **{{users}}** usuarios em um total de **{{servers}}** servidores "
+    },
+    "translate": {
+        "missingLanguage": "Indique uma linguagem qual você deseja traduzir",
+        "missingMessage": "Indique a mensagem qual você deseja traduzir",
+        "error": "Não consegui traduzir essa frase para este idioma..."
+    },
+    "spotify": {
+        "notListening": "O usuario não está escutando spotify"
+    },
+    "lock": {
+        "channelLockedSucessfully": "O canal foi fechado com sucesso !",
+        "channelAlreadyLocked": "O canal já está fechado!", 
+        "cannotLock": "Desculpe-me, não estou conseguindo fechar o canal!"
+    },
+    "unlock": {
+        "channelUnlockedSucessfully": "O canal foi aberto com sucesso !",
+        "channelAlreadyUnlocked": "O canal já está aberto!", 
+        "cannotUnlock": "Desculpe-me, não estou conseguindo abrir o canal!"
+    }, 
+    "weather": {
+        "missingCity": "Indique uma cidade qual você deseja ver o tempo",
+        "min": "Minima",
+        "max": "Maxíma",
+        "sensacaotermica": "Sensação Termica",
+        "barometro": "Barometro",
+        "vento": "Vento",
+        "pontodeorvalho": "Ponto de Orvalho",
+        "visibilidade": "Visibilidade",
+        "umidade": "Umídade"
+    }
+}
