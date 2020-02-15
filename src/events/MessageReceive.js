@@ -1,7 +1,7 @@
 const EventHandler = require('../structures/EventHandler');
 const CommandContext = require('../structures/command/CommandContext');
 const i18next = require('i18next');
-const CharlotteEmbed = require("../utils/CharlotteEmbed")
+const CharlotteEmbed = require("../structures/CharlotteEmbed")
 
 module.exports = class MessageReceive extends EventHandler {
     constructor(client) {

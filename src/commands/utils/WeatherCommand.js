@@ -1,5 +1,5 @@
 const CommandHandler = require('../../structures/command/CommandHandler');
-const WeatherApi = require("../../utils/WeatherApi/Weather")
+const WeatherApi = require("../../apis/Weather")
 const templates = require("../../utils/Canvas/Templates")
 module.exports = class WeatherCommand extends CommandHandler {
     constructor(client) {

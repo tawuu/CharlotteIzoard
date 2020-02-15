@@ -24,20 +24,28 @@ module.exports = class EventLoader  {
     }
 
     downloadLocalesFromGithub() {
-        for (let language of this.languages) {
-            for (let ns of this.ns) {
-                fs.promises.mkdir(`src/locales/${language}`, { recursive: true })
-                const file = createWriteStream(`src/locales/${language}/${ns}.json`);
-                const request = http.get(`https://raw.githubusercontent.com/ItzNerd/CharlotteLocales/master/pt-BR/${ns}.json`, function(response) {
-                    response.pipe(file);
-                });
+        try {
+
+            for (let language of this.languages) {
+                for (let ns of this.ns) {
+                    fs.promises.mkdir(`src/locales/${language}`, { recursive: true }).then(() => {
+
+                        const file = createWriteStream(`src/locales/${language}/${ns}.json`);
+                        const request = http.get(`https://raw.githubusercontent.com/ItzNerd/CharlotteLocales/master/pt-BR/${ns}.json`, function(response) {
+                            response.pipe(file);
+                        });
+                    })
+                }
             }
+        } catch (err) {
+            console.error(err)
+        } finally {
+            this.initializeLocales()
+            console.log(chalk.green("Locales are downloaded sucessfully"))
         }
-        this.initializeLocales()
     }
     async initializeLocales () {
         try {
-            
             i18next.use(translationBackend).init({
                 ns: this.ns,
                 preload: await readdirSync('./src/locales/'),

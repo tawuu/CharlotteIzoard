@@ -23,9 +23,9 @@ const CHARLOTTE_OPTIONS = {
 
 
 
-// Inicializing Canvas Utils
+// Inicializing Canvas Utils & Proptypes
+require("./src/utils/Proptypes").start()
 require("./src/utils/Canvas/CanvasUtils").start()
-
 
 const client = new CharlotteClient(CHARLOTTE_OPTIONS);
 

@@ -1,4 +1,4 @@
 module.exports = {
-    GoogleTranslateAPI: require("./GoogleTranslate/GoogleTranslateAPI"),
-    CharlotteEmbed: require("./CharlotteEmbed")
+    CanvasUtils: require("./Canvas/CanvasUtils"),
+    CanvasTemplates: require("./Canvas/Templates"),
 }

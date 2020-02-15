@@ -1,5 +1,4 @@
 const { Client } = require('discord.js');
-const Loaders = require('./loaders');
 
 module.exports = class CharlotteClient extends Client {
     constructor(options = {}) {
@@ -12,6 +11,7 @@ module.exports = class CharlotteClient extends Client {
     }
 
     initializeLoaders () {
+        const Loaders = require('./loaders');
         for (let name in Loaders) {
             try {
                 let Loader = new Loaders[name](this);
