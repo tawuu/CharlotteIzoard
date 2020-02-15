@@ -23,7 +23,6 @@ module.exports = class EventLoader  {
         }
     }
 
-
     async initializeLocales () {
         try {
             i18next.use(translationBackend).init({
