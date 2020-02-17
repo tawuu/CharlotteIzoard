@@ -12,7 +12,7 @@ module.exports = class EvalCommand extends CommandHandler {
             }
         })
     }
-    async execute ({guild, member, voice, channel, prefix, author, t, user, dbBot, dbGuild, CharlotteEmbed}, args) {
+    async execute ({guild, member, voice, channel, prefix, author, t, user, dbBot, dbGuild, CharlotteEmbed, me}, args) {
         try {
             const { Collection, MessageAttachment, MessageEmbed } = require('discord.js')
             const Canvas = require("canvas");
