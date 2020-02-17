@@ -7,15 +7,14 @@ module.exports = class BotinfoCommand extends CommandHandler {
             alias: ['bi'],
             category: "utils",
             requirements: {
-                botPermissions: [FLAGS.EMBED_LINKS]
+                botPermissions: [FLAGS.EMBED_LINKS, FLAGS.ATTACH_FILES]
             }
         })
     }
     async execute({ guild, member, channel, prefix, author, t, CharlotteEmbed, dbBot }, args) {
         
         let owner = await this.client.users.fetch(dbBot.staffers.owners[0])
-        
-        let HelpEmbed = new CharlotteEmbed()
+        let BiEmbed = new CharlotteEmbed()
             .setAuthor(author.tag, author.displayAvatarURL())
             .setTitle(t("commands:botinfo.myPrefix", {
                 prefix
@@ -35,7 +34,7 @@ module.exports = class BotinfoCommand extends CommandHandler {
                 owners: owner.tag
             }), owner.displayAvatarURL())
             .setThumbnail(this.client.user.displayAvatarURL())
-            channel.send(HelpEmbed)
+            channel.send(BiEmbed)
 
     }
 
