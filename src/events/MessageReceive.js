@@ -16,8 +16,8 @@ module.exports = class MessageReceive extends EventHandler {
         let t;
         const setFixedT = function (translate) { t = translate };
         setFixedT(i18next.getFixedT('pt-BR'));
-        
-        if (message.content.replace(/!/g, ""), message.guild.me.toString()) {
+
+        if (message.content.replace(/!/g, "") === message.guild.me.toString()) {
             message.reply(t("events:mention", {
                 prefix
             }))
