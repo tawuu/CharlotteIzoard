@@ -20,7 +20,7 @@ module.exports = class MuteCommand extends CommandHandler {
 
         let reason = args.slice(1).join(" ") || t("commands:mute.unreason")
 
-        let role = guild.roles.find(r => r.name === "Charlotte's Muted")
+        let role = guild.roles.cache.find(r => r.name === "Charlotte's Muted")
         if (!role) {
             role = await guild.roles.create({
                 data: {
