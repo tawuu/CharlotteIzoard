@@ -84,7 +84,7 @@ class TicTacToeGame {
         collector.on("collect", async (msg) => {
             if (isNaN(msg.content)) return;
             if (msg.author.id === this.participantes[this.vez].id) {
-                
+                msg.delete()
                 
                 let cordinate = this.getCordinate(msg.content)
                 
