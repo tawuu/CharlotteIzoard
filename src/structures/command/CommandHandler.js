@@ -20,7 +20,11 @@ module.exports = class CommandHandler {
         try {
             handleRequirements(ctx, this.requirements)
         } catch(err) {
-            return ctx.reply(err.message)
+            return ctx.reply(err.message).catch(err2 => {
+                ctx.author.send(err).catch(err3 => {
+                    console.log("Ai fode né, não consigo enviar mensagens no chat, e nem na DM do author da mensagem")
+                })
+            })
         }
 
         try {
