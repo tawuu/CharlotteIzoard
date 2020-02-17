@@ -16,18 +16,25 @@ module.exports = class CommandHandler {
         this.client = client
         this.dir = null
     }
-    _execute (ctx, args) {
-        try {
-            handleRequirements(ctx, this.requirements)
-        } catch(err) {
-            return ctx.reply(err.message)
-        }
+    _execute(ctx, args) {
+        return new Promise((resolve, rej) => {
 
-        try {
-            this.execute(ctx, args)
-        } catch(err) {
-            return ctx.reply(err.message)
-        }
+            try {
+                handleRequirements(ctx, this.requirements)
+            } catch (err) {
+            return ctx.reply(err.message).catch(err2 => {
+                    ctx.author.send(err).catch(err3 => {
+                        console.log("Ai fode né, não consigo enviar mensagens no chat, e nem na DM do author da mensagem")
+                    })
+                })
+            }
+
+            try {
+                resolve(this.execute(ctx, args))
+            } catch(err) {
+                return ctx.reply(err.message)
+            }
+        })
     }
     async execute () {}
 

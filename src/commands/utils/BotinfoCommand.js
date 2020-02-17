@@ -1,19 +1,20 @@
 const CommandHandler = require('../../structures/command/CommandHandler');
-
+const {Permissions: {FLAGS}} = require("discord.js")
 module.exports = class BotinfoCommand extends CommandHandler {
     constructor(client) {
         super(client, {
             name: 'botinfo',
             alias: ['bi'],
             category: "utils",
-            requirements: {}
+            requirements: {
+                botPermissions: [FLAGS.EMBED_LINKS, FLAGS.ATTACH_FILES]
+            }
         })
     }
     async execute({ guild, member, channel, prefix, author, t, CharlotteEmbed, dbBot }, args) {
         
         let owner = await this.client.users.fetch(dbBot.staffers.owners[0])
-        
-        let HelpEmbed = new CharlotteEmbed()
+        let BiEmbed = new CharlotteEmbed()
             .setAuthor(author.tag, author.displayAvatarURL())
             .setTitle(t("commands:botinfo.myPrefix", {
                 prefix
@@ -33,7 +34,7 @@ module.exports = class BotinfoCommand extends CommandHandler {
                 owners: owner.tag
             }), owner.displayAvatarURL())
             .setThumbnail(this.client.user.displayAvatarURL())
-            channel.send(HelpEmbed)
+            channel.send(BiEmbed)
 
     }
 

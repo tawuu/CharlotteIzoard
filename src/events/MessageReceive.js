@@ -40,7 +40,6 @@ module.exports = class MessageReceive extends EventHandler {
         let t;
         const setFixedT = function (translate) { t = translate };
         setFixedT(i18next.getFixedT('pt-BR'));
-
         let context = new CommandContext(this.client, {
             message,
             prefix,
@@ -50,8 +49,9 @@ module.exports = class MessageReceive extends EventHandler {
             guild,
             CharlotteEmbed
         });
-
-        cmd._execute(context, args)
+        cmd._execute(context, args).catch(err => {
+            context.reply("Não consegui fazer a finalização deste comando: ```js\n"+err.message+"```")
+        })
 
     }
 };
