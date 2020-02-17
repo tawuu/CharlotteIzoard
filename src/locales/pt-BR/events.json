@@ -2,5 +2,6 @@
   "newFriend": "Olá {{user}}, se é que eu posso te chamar assim :relaxed:. Eu vi que você é novo me usando, você foi adicionado ao meu banco de dados e que tal de você ser amigo da char? Se você gostar de mim, pode votar em mim no discord bots list, mas se não gostar de mim, pode simplesmente ir embora, mas char irá sentir saudades, então... eu tenho uma porção de comandos e jogos, ainda estou em fase beta... Então, se divirta me usando (por favor não pense em besteira)",
   "guildCreated": {
     "thanksForAdded": "Olá {{user}}, eu sou a {{name}}, Muito obrigado por me adicionar no {{server}} (pelo menos eu acho que foi você que me adicionou)! \n\nMas então, eu sou um bot multifunções, com muitos jogos, e muitos comandos divertidos para alegrar seu servidor!\n\nSe quiser saber quais são meus comandos, digite `{{prefix}}ajuda`, e se estiver com dificuldades com minhas funções, entre em meu servidor de suporte digitando `{{prefix}}suporte`.\n\nE mais uma vez, OBRIGADAAA por me adicionar. "
-  }
+  },
+  "mention": "Olá eu sou a Charlotte. Meu prefixo é `{{prefix}}`, digite `{{prefix}}help` para mais ajuda :)"
 }
