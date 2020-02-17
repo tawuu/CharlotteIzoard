@@ -50,6 +50,8 @@ module.exports = class MuteCommand extends CommandHandler {
                 .replace(/(minuto|minutos)/ig, "min")
                 .replace(/(hora|horas)/ig, "hours")
                 .replace(/(semana|semanas)/ig, "weeks")
+                .replace(/(dia|dias)/ig, "weeks")
+            
             let time = parse(msg.content)
             collector.stop()
             if (time < 60000) return reply(t("commands:mute.invalidTime"))

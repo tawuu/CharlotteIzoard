@@ -1,6 +1,7 @@
 const CommandHandler = require('../../structures/command/CommandHandler')
 const { MessageEmbed, MessageAttachment } = require("discord.js")
 const TicTacToeBASE = require("../../structures/games/TicTacToe")
+const { Permissions: { FLAGS } } = require("discord.js");
 
 module.exports = class TicTacToeCommand extends CommandHandler {
     constructor(client) {
@@ -9,6 +10,7 @@ module.exports = class TicTacToeCommand extends CommandHandler {
             alias: ['ttt', 'jogodavelha'],
             category: "games",
             requirements: {
+                botPermissions: [FLAGS.EMBED_LINKS, FLAGS.ATTACH_FILES]
             }
         })
 

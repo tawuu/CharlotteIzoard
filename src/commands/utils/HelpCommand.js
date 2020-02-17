@@ -1,5 +1,6 @@
 const CommandHandler = require('../../structures/command/CommandHandler');
 const {MessageEmbed} = require('discord.js')
+const {Permissions: {FLAGS}} = require("discord.js")
 
 module.exports = class HelpCommand extends CommandHandler {
     constructor(client) {
@@ -7,7 +8,9 @@ module.exports = class HelpCommand extends CommandHandler {
             name: 'help',
             alias: ['ajuda'],
             category: "utils",
-            requirements: {}
+            requirements: {
+                botPermissions: [FLAGS.EMBED_LINKS]
+            }
         })
     }
     async execute ({guild, member, voice, channel, prefix, author, t, CharlotteEmbed}, args) {

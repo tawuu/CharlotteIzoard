@@ -1,12 +1,14 @@
 const CommandHandler = require('../../structures/command/CommandHandler');
-
+const {Permissions: {FLAGS}} = require("discord.js")
 module.exports = class BotinfoCommand extends CommandHandler {
     constructor(client) {
         super(client, {
             name: 'botinfo',
             alias: ['bi'],
             category: "utils",
-            requirements: {}
+            requirements: {
+                botPermissions: [FLAGS.EMBED_LINKS]
+            }
         })
     }
     async execute({ guild, member, channel, prefix, author, t, CharlotteEmbed, dbBot }, args) {

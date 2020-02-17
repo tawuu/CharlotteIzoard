@@ -11,7 +11,10 @@ const parseOptions = function (options = {}) {
 }
 const handleRequirements = function ({ author, channel, client, guild, member, me, t, dbBot }, options) {
 	let opt = parseOptions(options);
-
+	if (!me.permissions.has("SEND_MESSAGES")) throw new Error(t("permissions:meWithoutPermission", {
+		perms: `SEND_MESSAGES`
+	}))
+	
 	if (opt.onlyDevs && !dbBot.staffers.owners.includes(author.id)){
 		throw new Error(t('permissions:onlyDevelopers'));
 	}

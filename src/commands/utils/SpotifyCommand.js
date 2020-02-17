@@ -2,6 +2,7 @@ const CommandHandler = require('../../structures/command/CommandHandler');
 const Canvas = require("canvas");
 const {MessageAttachment} = require("discord.js")
 const moment = require("moment")
+const {Permissions: {FLAGS}} = require("discord.js")
 
 module.exports = class SpotifyCommand extends CommandHandler {
     constructor(client) {
@@ -9,7 +10,9 @@ module.exports = class SpotifyCommand extends CommandHandler {
             name: 'spotify',
             alias: [],
             category: "utils",
-            requirements: {}
+            requirements: {
+                botPermissions: [FLAGS.ATTACH_FILES]
+            }
         })
     }
     async execute({ guild, member, reply, channel, prefix, author, t, CharlotteEmbed, dbBot, getUserAt }, args) {

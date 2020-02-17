@@ -1,13 +1,16 @@
 const CommandHandler = require('../../structures/command/CommandHandler');
+const { Permissions: { FLAGS } } = require("discord.js");
+const { CanvasTemplates } = require("../../utils/");
 
-const { CanvasTemplates } = require("../../utils/")
 module.exports = class WeatherCommand extends CommandHandler {
     constructor(client) {
         super(client, {
             name: 'weather',
             alias: ['tempo'],
             category: "utils",
-            requirements: {}
+            requirements: {
+                botPermissions: [FLAGS.ATTACH_FILES, FLAGS.EMBED_LINKS]
+            }
         })
     }
     async execute({ guild, reply, channel, author, t, CharlotteEmbed }, args) {
