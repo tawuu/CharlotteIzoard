@@ -72,5 +72,10 @@
         "visibilidade": "Visibility",
         "umidade": "Moisture",
         "precipitacao": "Precipitation"
+    },
+    "slowmode": {
+        "invalidNumber": "Enter a valid number !",
+        "slowmodeChanged": "The channel slow mode has been changed to **{{x}}** second's",
+        "cannotChange": "I can not change the channel slowmode"
     }
 }
