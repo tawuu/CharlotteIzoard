@@ -26,7 +26,6 @@ class TicTacToeGame {
     async updateEmbed (message, channel, t, winner) {
         let canvas = await this.generateTictactoeImage(this.game)
         if ([0,1].includes(winner)) {
-            message.delete()
             channel.send(this.participantes[winner].toString(), new MessageEmbed({
                 title: t("commands:tictactoe.congradulations"),
                 description: `:o: **${this.participantes[0].tag}**\n:x: **${this.participantes[1].tag}**\n\n` + t("commands:tictactoe.hasWinner", {
@@ -41,7 +40,6 @@ class TicTacToeGame {
                 }]
             }).setColor("RANDOM"))
         }  else if (this.jogada >= 9) {
-            message.delete()
             channel.send(this.participantes[0].toString()+this.participantes[1].toString(), new MessageEmbed({
                 title: t("commands:tictactoe.noHasWinner"),
                 description: `:o: **${this.participantes[0].tag}**\n:x: ${this.participantes[1].tag}\n\n`+t("commands:tictactoe.noWinnerMessage"),
@@ -70,7 +68,6 @@ class TicTacToeGame {
             }))
             .setFooter(t('commands:tictactoe.sendNumber'))
             .setDescription(`:o: **${this.participantes[0].tag}**\n:x: **${this.participantes[1].tag}**`)
-            message.delete()
             await channel.send(GameEmbed).then(cc => {
                 this.createCollector(cc, cc.channel,t)
             })
@@ -89,7 +86,8 @@ class TicTacToeGame {
                 
                 if (this.isEmpty(this.game, cordinate)) {
                     collector.stop()
-                    msg.delete()
+                    if (msg.deletable) msg.delete()
+                    cc.delete()
                     this.game[cordinate[0]][cordinate[1]] = this.participantes[this.vez].id === this.emotes['1'] ? 0 : 1;
                     this.vez = this.vez === 0 ? 1 : 0
                     let winner = this.getWinner()
