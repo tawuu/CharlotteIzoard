@@ -22,8 +22,8 @@ module.exports = class BotinfoCommand extends CommandHandler {
             .setDescription(t("commands:botinfo.aboutMe", {
                 name: this.client.user.username,
                 version: require("discord.js").version,
-                users: this.client.users.size,
-                servers: this.client.guilds.size,
+                users: this.client.users.cache.size,
+                servers: this.client.guilds.cache.size,
                 owner: owner.tag,
                 commands: this.client.commands.size
             }))

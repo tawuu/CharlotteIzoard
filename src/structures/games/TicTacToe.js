@@ -84,12 +84,12 @@ class TicTacToeGame {
         collector.on("collect", async (msg) => {
             if (isNaN(msg.content)) return;
             if (msg.author.id === this.participantes[this.vez].id) {
-                msg.delete()
                 
                 let cordinate = this.getCordinate(msg.content)
                 
                 if (this.isEmpty(this.game, cordinate)) {
                     collector.stop()
+                    msg.delete()
                     this.game[cordinate[0]][cordinate[1]] = this.participantes[this.vez].id === this.emotes['1'] ? 0 : 1;
                     this.vez = this.vez === 0 ? 1 : 0
                     let winner = this.getWinner()
@@ -184,7 +184,7 @@ class TicTacToeGame {
         ctx.fillRect(1024, 0, 20, 1536)
         ctx.fillRect(0, 512, 1536, 20)
         ctx.fillRect(0, 1024, 1536, 20)
-        ctx.font = "400px Arial Black"
+        ctx.font = "bold 400px sans-serif"
         ctx.textAlign= "center"
         ctx.globalAlpha = 0.05;
         
