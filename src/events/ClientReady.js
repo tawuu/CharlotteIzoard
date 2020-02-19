@@ -39,9 +39,9 @@ module.exports = class ClientOnReady extends EventHandler {
         let me = await this.client.database.me.findById(process.env.CLIENT_ID)
         this.client.commands.forEach(async (command) => {
             if (command.category === "devs") return;
-            if (!me.commands.find(a => a.name === command.name)) {
+            if (!me.commands.find(a => a._id === command.name)) {
                 me.commands.push({
-                    commandName: command.name
+                    _id: command.name
                 })
             }
         })

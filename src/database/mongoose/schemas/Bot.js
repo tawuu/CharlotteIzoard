@@ -6,7 +6,7 @@ const staffers = {
 }
 const commands = [
     {
-        commandName: String,
+        _id: String,
         maintenance: {
             type: Boolean,
             default: false

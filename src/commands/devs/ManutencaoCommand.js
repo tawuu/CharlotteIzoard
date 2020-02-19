@@ -17,7 +17,7 @@ module.exports = class ManutencaoCommand extends CommandHandler {
         if (!args[0]) return reply("Fala o nome do comando")
         let comando = this.client.commands.get(args[0]) || this.client.alias.get(this.client.commands.get(args[0]))
         if (!comando) return reply("Fala um comando valido")
-        let cmd = dbBot.commands.find(a => a.commandName === comando.name)
+        let cmd = dbBot.commands.find(a => a._id === comando.name)
         if (!cmd.maintenance) {
             cmd.maintenance = true
             cmd.maintenanceReason = args.slice(1).join(" ") || "Nenhum motivo especificado"

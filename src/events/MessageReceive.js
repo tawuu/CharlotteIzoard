@@ -60,7 +60,7 @@ module.exports = class MessageReceive extends EventHandler {
         });
         
         let commandDb = await this.client.database.me.findById(process.env.client_id);
-        let com = commandDb.commands.find(a => a.commandName === cmd.name)
+        let com = commandDb.commands.find(a => a._id === cmd.name)
         if (com) {
             if (com.maintenance) return context.reply(t("events:commandWithMaintenance", {
                 reason: com.maintenanceReason

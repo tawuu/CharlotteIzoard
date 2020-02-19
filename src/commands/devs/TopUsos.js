@@ -18,7 +18,7 @@ module.exports = class TopUsosCommand extends CommandHandler {
         let cmds = dbBot.commands
         
         let sorted = cmds.sort((a, b) => b.uses - a.uses)
-            .map(a => a.commandName + " " + a.uses)
+            .map(a => a._id + " " + a.uses)
             .slice(0, 10)
             .join("\n")
         
