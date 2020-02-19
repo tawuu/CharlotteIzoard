@@ -3,5 +3,6 @@
   "guildCreated": {
     "thanksForAdded": "Hello {{user}}, I'm the {{name}}, Thank you so much for adding me on {{server}} (at least I think it was you who added me)! \n\nBut then, I'm a multifunction bot, with lots of games, and lots of fun commands to cheer up your server!\n\nIf you want to know what my commands are, type `{{prefix}}help`, and if you are having difficulties with my functions, enter my support server by typing `{{prefix}}Support`.\n\nAnd again, THANK YOU for adding me. "
   },
-  "mention": "Hello! I'm Charlotte. My prefix is `{{prefix}}`, type `{{prefix}}help` for more help :)"
+  "mention": "Hello! I'm Charlotte. My prefix is `{{prefix}}`, type `{{prefix}}help` for more help :)",
+  "commandWithMaintenance": "This command is being maintained due to: **{{reason}}**"
 }

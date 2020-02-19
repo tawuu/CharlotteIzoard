@@ -21,8 +21,12 @@ module.exports = class DatabaseLoader  {
 
     initializeDatabase (DBWrapper, options = {}) {
         this.client.database = new DBWrapper(options);
+        this.client.database.ok = false
         this.client.database.startConnection()
-            .then(() => console.log('Connection was made to the database!'))
+            .then(() => {
+                this.client.database.ok = true
+                console.log('Connection was made to the database!')
+            })
             .catch(e => {
                 console.log(e.message);
                 this.client.database = null

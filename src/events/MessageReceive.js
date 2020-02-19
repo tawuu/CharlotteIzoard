@@ -49,7 +49,6 @@ module.exports = class MessageReceive extends EventHandler {
         let command = args.shift().toLowerCase();
         let cmd = this.client.commands.get(command) || this.client.commands.get(this.client.alias.get(command));
         if (!cmd) return;
-
         let context = new CommandContext(this.client, {
             message,
             prefix,
@@ -59,6 +58,16 @@ module.exports = class MessageReceive extends EventHandler {
             guild,
             CharlotteEmbed
         });
+        
+        let commandDb = await this.client.database.me.findById(process.env.client_id);
+        let com = commandDb.commands.find(a => a.commandName === cmd.name)
+        if (com) {
+            if (com.maintenance) return context.reply(t("events:commandWithMaintenance", {
+                reason: com.maintenanceReason
+            }))
+            com.uses += 1
+            commandDb.save()
+        }
         cmd._execute(context, args).catch(err => {
             context.reply("Não consegui fazer a finalização deste comando: ```js\n"+err.message+"```")
         })
