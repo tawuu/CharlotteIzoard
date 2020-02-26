@@ -1,3 +1,5 @@
+const { User } = require("eris")
+
 module.exports = class Proptypes {
     static start() {
         Array.prototype.remove = function() {
@@ -11,5 +13,10 @@ module.exports = class Proptypes {
             return this;
         };
 
+        Object.defineProperty(User.prototype, "tag", {
+            get: function() {
+                return `${this.username}#${this.discriminator}`;
+            }
+        });
     }
 }
