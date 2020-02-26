@@ -1,9 +1,8 @@
-const CharlotteClient = require('./src/CharlotteClient');
-const express = require("express");
-const app = express();
 const dotenv = require('dotenv');
 dotenv.config();
 
+const express = require("express");
+const app = express();
 // Ela ta em uma host gratuita, então sim, eu preciso disso
 app.listen(process.env.PORT ? process.env.PORT : 3000)
 setInterval(() => {
@@ -14,19 +13,20 @@ app.get("/", (req, res) => {
 })
 
 
+require("./src/utils/Proptypes").start();
+require("./src/utils/Canvas/CanvasUtils").start();
 
+
+const CharlotteClient = require('./src/CharlotteClient');
 const CHARLOTTE_OPTIONS = {
+    autoreconnect: true,
     disableEveryone: true,
-    fetchAllMembers: true,
-    restRequestTimeout: 60000
-};
+    getAllUsers: true,
+    requestTimeout: 30000,
+    restMode: true
+}
 
 
+const client = new CharlotteClient(process.env.token, CHARLOTTE_OPTIONS);
 
-// Inicializing Canvas Utils & Proptypes
-require("./src/utils/Proptypes").start()
-require("./src/utils/Canvas/CanvasUtils").start()
-
-const client = new CharlotteClient(CHARLOTTE_OPTIONS);
-
-client.login(process.env.token); // Inicializando a Charlotte ♥
+client.connect(); // Inicializando a Charlotte ♥
