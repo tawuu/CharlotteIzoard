@@ -12,20 +12,20 @@ module.exports = class ReloadCommand extends CommandHandler {
             }
         })
     }
-    async execute ({guild, member, voice, channel, prefix, author, t}, args) {
+    async execute ({guild, member, voice, reply, prefix, author, t}, args) {
         try {
 
             if (args[0]) {
                 this.client.reloadCommand(args[0])
-                channel.send(args[0] === "all" ? "Todos os comandos foram recarregados" : `O comandos ${args[0]} foi recarregado lol`)
+                reply(args[0] === "all" ? "Todos os comandos foram recarregados" : `O comandos ${args[0]} foi recarregado lol`)
             } else {
-                channel.send("Indique o nome do comando")
+                reply("Indique o nome do comando")
             }
 
         } catch (err) {
-            channel.send(`Não consegui recarregar o comando`)
+            reply(`Não consegui recarregar o comando`)
         }
     }
 
-    
+
 }

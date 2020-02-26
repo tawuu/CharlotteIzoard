@@ -12,17 +12,17 @@ module.exports = class TopUsosCommand extends CommandHandler {
             }
         })
     }
-    async execute ({guild, member, voice, channel, prefix, author, t, user, dbBot, dbGuild, CharlotteEmbed, me, reply}, args) {
+    async execute ({guild, member, reply, prefix, author, t, user, dbBot, dbGuild, me}, args) {
 
-        
+
         let cmds = dbBot.commands
-        
+
         let sorted = cmds.sort((a, b) => b.uses - a.uses)
             .map(a => a._id + " " + a.uses)
             .slice(0, 10)
             .join("\n")
-        
-        channel.send(sorted, {
+
+        reply(sorted, {
             code: "js"
         })
     }

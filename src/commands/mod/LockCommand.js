@@ -1,5 +1,5 @@
 const CommandHandler = require('../../structures/command/CommandHandler');
-const { Permissions } = require('discord.js');
+const { Constants: {Permissions} } = require("eris")
 
 module.exports = class LockCommand extends CommandHandler {
     constructor(client) {
@@ -8,23 +8,15 @@ module.exports = class LockCommand extends CommandHandler {
             alias: ['trancar'],
             category: "mod",
             requirements: {
-                permissions: [Permissions.FLAGS.MANAGE_CHANNELS],
-                botPermissions: [Permissions.FLAGS.MANAGE_CHANNELS]
+                permissions: [Permissions.manageChannels],
+                botPermissions: [Permissions.manageChannels]
             }
         })
     }
     async execute({ guild, reply, channel, author, t, getUserAt }, args) {
-
-        if (channel.permissionOverwrites.get(guild.id).deny.toArray().includes("SEND_MESSAGES")) return reply(t("commands:lock.channelAlreadyLocked")) 
-        channel.overwritePermissions({
-            permissionOverwrites: [
-                {
-                    id: guild.id,
-                    deny: ['SEND_MESSAGES'],
-                },
-            ],
-            reason: 'Lock Command'
-        }).then(() => {
+        let permission = channel.permissionOverwrites.get(guild.id).json.readMessages
+        if (permission !== true && permission !== undefined) return reply(t("commands:lock.channelAlreadyLocked")) 
+        channel.editPermission(guild.id, null, Permissions.sendMessages, "role").then(() => {
             reply(t("commands:lock.channelLockedSucessfully"))
         }).catch((err) => {
             reply(t("commands:lock.cannotLock"))

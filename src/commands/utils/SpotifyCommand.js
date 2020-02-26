@@ -1,8 +1,7 @@
 const CommandHandler = require('../../structures/command/CommandHandler');
 const Canvas = require("canvas");
-const {MessageAttachment} = require("discord.js")
 const moment = require("moment")
-const {Permissions: {FLAGS}} = require("discord.js")
+const { Constants: {Permissions} } = require("eris")
 
 module.exports = class SpotifyCommand extends CommandHandler {
     constructor(client) {
@@ -11,24 +10,24 @@ module.exports = class SpotifyCommand extends CommandHandler {
             alias: [],
             category: "utils",
             requirements: {
-                botPermissions: [FLAGS.ATTACH_FILES]
+                botPermissions: [Permissions.attachFiles]
             }
         })
     }
-    async execute({ guild, member, reply, channel, prefix, author, t, CharlotteEmbed, dbBot, getUserAt }, args) {
+    async execute({ guild, member, reply, channel, prefix, author, t, dbBot, getUserAt }, args) {
         
-        let user = await getUserAt(0) || author
-        let activity = user.presence
-        let spotify = activity.activities.filter(a => a.name === "Spotify")
+        let user = await getUserAt(0, true) || member
+        let activity = user.activities
+        let spotify = activity.find(spotify => spotify.name === "Spotify")
 
-        if (activity && spotify.length >= 1 && spotify[0].name.toLowerCase().includes("spotify")) {
+        if (activity && spotify && spotify.name.toLowerCase().includes("spotify")) {
             
             const canvas = Canvas.createCanvas(512 * 3, 512);
             const ctx = canvas.getContext("2d");
-            let nome = spotify[0].details
-            let by = spotify[0].state
+            let nome = spotify.details
+            let by = spotify.state
             
-            let img = await Canvas.loadImage(spotify[0].assets.largeImageURL());
+            let img = await Canvas.loadImage( "https://i.scdn.co/image/"+ spotify.assets.large_image.split(":")[1]);
             let spotifyLogo = await Canvas.loadImage("https://cdn.discordapp.com/emojis/554334875411415107.png");
             ctx.drawImageBlurred(img, 10, 512, -512 / 2, 512 * 2, 512 * 2);
             ctx.fillStyle = "white"
@@ -38,15 +37,11 @@ module.exports = class SpotifyCommand extends CommandHandler {
             ctx.shadowColor = "black"
             ctx.shadowBlur = 300
             ctx.fillRect(0, 512, canvas.width + 200, 5000)
-            
-
-            
-
-
+        
             ctx.drawImage(img, 0, 0, 512, 512);
             ctx.drawImage(spotifyLogo, 550, 38, 100, 100)
-            let start = spotify[0].timestamps.start
-            let end = spotify[0].timestamps.end
+            let start = spotify.timestamps.start
+            let end = spotify.timestamps.end
             let valor = (new Date() - start) / (end - start)
             
             ctx.font = "60px Arial Black"
@@ -67,7 +62,10 @@ module.exports = class SpotifyCommand extends CommandHandler {
             ctx.roundRect(550, 512 - 35, valor * ((512 * 3) - 600), 20, 10, true, false)//linha preenchida
 
 
-            channel.send(new MessageAttachment(canvas.toBuffer(), "spotify.png"));
+            reply({}, {
+                file: canvas.toBuffer(),
+                name: "spotify.png"
+            });
 
         } else {
             reply(t("commands:spotify.notListening"))

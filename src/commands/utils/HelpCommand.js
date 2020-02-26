@@ -1,6 +1,6 @@
 const CommandHandler = require('../../structures/command/CommandHandler');
-const {MessageEmbed} = require('discord.js')
-const {Permissions: {FLAGS}} = require("discord.js")
+const { Constants: {Permissions} } = require("eris")
+
 
 module.exports = class HelpCommand extends CommandHandler {
     constructor(client) {
@@ -9,19 +9,36 @@ module.exports = class HelpCommand extends CommandHandler {
             alias: ['ajuda'],
             category: "utils",
             requirements: {
-                botPermissions: [FLAGS.EMBED_LINKS]
+                botPermissions: [Permissions.embedLinks]
             }
         })
     }
-    async execute ({guild, member, voice, channel, prefix, author, t, CharlotteEmbed}, args) {
-        let HelpEmbed = new CharlotteEmbed()
-            .setAuthor(author.tag, author.displayAvatarURL())
-            .setTitle(t("help:myCommands"))
-            .addField(`👮 ${t('help:moderation')}`, this.getCommands("mod") || t("help:noCommands"))
-            .addField(`⚙ ${t('help:utils')}`, this.getCommands("utils") || t("help:noCommands"))
-            .addField(`🎮 ${t('help:videogame')}`, this.getCommands("games") || t("help:noCommands"))
-            .setThumbnail(this.client.user.displayAvatarURL())
-            channel.send(HelpEmbed)
+    async execute ({guild, member, voice, reply, prefix, author, t}, args) {
+        reply({
+            embed: {
+                author: {
+                    name: author.username,
+                    icon_url: author.avatarURL
+                },
+                thumbnail: {
+                    url: this.client.user.avatarURL
+                },
+                fields: [
+                    {
+                        name: `👮 ${t('help:moderation')}`,
+                        value: this.getCommands("mod") || t("help:noCommands")
+                    },
+                    {
+                        name: `⚙ ${t('help:utils')}`,
+                        value: this.getCommands("utils") || t("help:noCommands")
+                    },
+                    {
+                        name: `🎮 ${t('help:videogame')}`,
+                        value: this.getCommands("games") || t("help:noCommands")
+                    }
+                ]
+            }
+        })
 
     }
     getCommands (category) {

@@ -1,5 +1,5 @@
 const CommandHandler = require('../../structures/command/CommandHandler');
-const { Permissions } = require('discord.js');
+const { Constants: {Permissions} } = require("eris")
 
 module.exports = class SlowmodeCommand extends CommandHandler {
     constructor(client) {
@@ -8,8 +8,8 @@ module.exports = class SlowmodeCommand extends CommandHandler {
             alias: ['modolento'],
             category: "mod",
             requirements: {
-                permissions: [Permissions.FLAGS.MANAGE_CHANNELS],
-                botPermissions: [Permissions.FLAGS.MANAGE_CHANNELS]
+                permissions: [Permissions.manageChannels],
+                botPermissions: [Permissions.manageChannels]
             }
         })
     }
@@ -17,7 +17,9 @@ module.exports = class SlowmodeCommand extends CommandHandler {
         let nmbr = Number(args[0])
         if (isNaN(nmbr) && !nmbr) return reply(t("commands:slowmode.invalidNumber"))
 
-        channel.setRateLimitPerUser(Number(nmbr)).then(() => {
+        channel.edit({
+            rateLimitPerUser: Number(nmbr)
+        }).then(() => {
             reply(t("commands:slowmode.slowmodeChanged", {
                 x: nmbr
             }))

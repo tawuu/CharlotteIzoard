@@ -1,5 +1,5 @@
 const CommandHandler = require('../../structures/command/CommandHandler');
-const { Permissions: { FLAGS } } = require('discord.js');
+const { Constants: {Permissions} } = require("eris")
 const parse = require('parse-duration')
 
 module.exports = class MuteCommand extends CommandHandler {
@@ -9,8 +9,8 @@ module.exports = class MuteCommand extends CommandHandler {
             alias: ['mutar', "silenciar"],
             category: "mod",
             requirements: {
-                permissions: [FLAGS.MANAGE_CHANNELS, FLAGS.MANAGE_MESSAGES],
-                botPermissions: [FLAGS.MANAGE_CHANNELS, FLAGS.MANAGE_ROLES]
+                permissions: [Permissions.manageChannels, Permissions.manageMessages],
+                botPermissions: [Permissions.manageChannels, Permissions.manageRoles]
             }
         })
     }
@@ -20,52 +20,47 @@ module.exports = class MuteCommand extends CommandHandler {
 
         let reason = args.slice(1).join(" ") || t("commands:mute.unreason")
 
-        let role = guild.roles.cache.find(r => r.name === "Charlotte's Muted")
+        let role = guild.roles.find(r => r.name === "Charlotte's Muted")
         if (!role) {
-            role = await guild.roles.create({
-                data: {
-                    name: "Charlotte's Muted",
-                    color: "#000000",
-                    permissions: []
-                }
+            role = await this.client.createRole(guild.id, {
+                name: "Charlotte's Muted"
             })
-            guild.channels.forEach(async (aaaa, id) => {
-                aaaa.overwritePermissions({
-                    permissionOverwrites: [
-                        {
-                            id: role.id,
-                            deny: ["SEND_MESSAGES", "ADD_REACTIONS", "SPEAK", "CONNECT"]
-                        }
-                    ]
-                })
+            guild.channels.forEach(async (channel) => {
+                let deny = Permissions.sendMessages+Permissions.addReactions
+                channel.editPermission(role.id, null, deny, "role")
             });
         }
 
-        reply(t("commands:mute.sayTheTime"))
-        let filter = (ur) => ur.author.id === author.id;
-        const collector = await channel.createMessageCollector(filter);
-        collector.on("collect", async (msg) => {
-            msg.content = msg.content
-                .replace(/(meses|mêses|mes|mês)/ig, "months")
-                .replace(/(minuto|minutos)/ig, "min")
-                .replace(/(hora|horas)/ig, "hours")
-                .replace(/(semana|semanas)/ig, "weeks")
-                .replace(/(dia|dias)/ig, "weeks")
-            
-            let time = parse(msg.content)
-            collector.stop()
-            if (time < 60000) return reply(t("commands:mute.invalidTime"))
-            if (time > 7889400000) return reply(t("commands:mute.maxTime"))
+        reply(t("commands:mute.sayTheTime")).then(m => {
 
-            dbGuild.mutedUsers.set(user.id, {
-                reason,
-                time
-            })
-            dbGuild.save()
-            user.roles.add(role.id).then(() => {
-                reply(t("commands:mute.mutedSucessfully"))
-            }).catch(err => {
-                reply(t("commands:mute.cannotMute"))
+            let filter = (ur) => ur.author.id === author.id;
+            const collector = new this.client.utils.MessageCollector(m.channel, filter, {
+                time: 60000
+            });
+            collector.on("collect", async (msg) => {
+
+                msg.content = msg.content
+                    .replace(/(meses|mêses|mes|mês)/ig, "months")
+                    .replace(/(minuto|minutos)/ig, "min")
+                    .replace(/(hora|horas)/ig, "hours")
+                    .replace(/(semana|semanas)/ig, "weeks")
+                    .replace(/(dia|dias)/ig, "weeks")
+                
+                let time = parse(msg.content)
+                collector.stopListeners()
+                if (time < 60000) return reply(t("commands:mute.invalidTime"))
+                if (time > 7889400000) return reply(t("commands:mute.maxTime"))
+
+                dbGuild.mutedUsers.set(user.id, {
+                    reason,
+                    time
+                })
+                dbGuild.save()
+                user.addRole(role.id).then(() => {
+                    reply(t("commands:mute.mutedSucessfully"))
+                }).catch(err => {
+                    reply(t("commands:mute.cannotMute"))
+                })
             })
         })
     }

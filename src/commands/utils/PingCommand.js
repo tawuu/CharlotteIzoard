@@ -9,10 +9,10 @@ module.exports = class PingCommand extends CommandHandler {
             requirements: {}
         })
     }
-    async execute ({guild, member, voice, channel, prefix, author, t}, args) {
-        channel.send(t('commands:ping.response', {
-            ping: Math.floor(this.client.ws.ping),
-            author: author.toString()
+    async execute ({guild, member, voice, reply, prefix, author, t}, args) {
+        reply(t('commands:ping.response', {
+            ping: Math.floor(guild.shard.latency),
+            author: author.mention
         }))
     }
 }

@@ -1,5 +1,6 @@
 const CommandHandler = require('../../structures/command/CommandHandler');
-const {Permissions: {FLAGS}} = require("discord.js")
+const { Constants: {Permissions} } = require("eris")
+
 module.exports = class BotinfoCommand extends CommandHandler {
     constructor(client) {
         super(client, {
@@ -7,34 +8,48 @@ module.exports = class BotinfoCommand extends CommandHandler {
             alias: ['bi'],
             category: "utils",
             requirements: {
-                botPermissions: [FLAGS.EMBED_LINKS, FLAGS.ATTACH_FILES]
+                botPermissions: [Permissions.embedLinks, Permissions.attachFiles]
             }
         })
     }
-    async execute({ guild, member, channel, prefix, author, t, CharlotteEmbed, dbBot }, args) {
-        
-        let owner = await this.client.users.fetch(dbBot.staffers.owners[0])
-        let BiEmbed = new CharlotteEmbed()
-            .setAuthor(author.tag, author.displayAvatarURL())
-            .setTitle(t("commands:botinfo.myPrefix", {
-                prefix
-            }))
-            .setDescription(t("commands:botinfo.aboutMe", {
-                name: this.client.user.username,
-                version: require("discord.js").version,
-                users: this.client.users.cache.size,
-                servers: this.client.guilds.cache.size,
-                owner: owner.tag,
-                commands: this.client.commands.size
-            }))
-            .addField("🐱 Github", t("commands:botinfo.clickhere", {
-                url: "https://github.com/ItzNerd/CharlotteIzoard"
-            }))
-            .setFooter(t("commands:botinfo.createdBy", {
-                owners: owner.tag
-            }), owner.displayAvatarURL())
-            .setThumbnail(this.client.user.displayAvatarURL())
-            channel.send(BiEmbed)
+    async execute({ guild, member, reply, prefix, author, t, dbBot }, args) {
+        let owner = await this.client.getRESTUser(dbBot.staffers.owners[0])
+        reply({
+            embed: {
+                author: {
+                    name: author.username,
+                    icon_url: author.avatarURL
+                },
+                title: t("commands:botinfo.myPrefix", {
+                    prefix
+                }),
+                description: t("commands:botinfo.aboutMe", {
+                    name: this.client.user.username,
+                    version: require("eris").VERSION,
+                    users: this.client.users.size,
+                    servers: this.client.guilds.size,
+                    owner: owner.username,
+                    commands: this.client.commands.size
+                }),
+                fieds: [
+                    {
+                        name: "🐱 Github",
+                        value: t("commands:botinfo.clickhere", {
+                            url: "https://github.com/ItzNerd/CharlotteIzoard"
+                        })
+                    }
+                ],
+                footer: {
+                    text: t("commands:botinfo.createdBy", {
+                        owners: owner.username
+                    }),
+                    icon_url: owner.avatarURL
+                },
+                thumbnail: {
+                    url: this.client.user.avatarURL
+                }
+            }
+        })
 
     }
 
