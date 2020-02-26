@@ -1,30 +1,34 @@
 module.exports = class CommandContext {
     constructor(client, options) {
         this.client = client;
-        this.message = options.message;
-        this.guild = options.message.guild ? options.message.guild : null;
+        this.guild = options.guild ? options.guild : null;
         this.prefix = options.prefix;
-        this.channel = options.message.channel;
-        this.member = options.message.guild ? options.message.member : null;
-        this.voice = options.message.guild ? options.message.member.voice : null;
-        this.author = options.message.author;
+        this.channel = options.channel;
+        this.member = options.guild ? options.member : null;
+        this.author = options.author;
         this.t = options.t;
-        this.me = options.message.guild ? options.message.guild.me : null;
+        this.me = options.guild ? options.guild.members.get(this.client.user.id) : null;
         this.user = options.user;
-        this.reply = (text, opt) => options.message.channel.send(`**${options.message.author.username}**, ${text}`, opt);
+        this.reply = async (text, ...files) => {
+            let msg;
+            if (text instanceof Object) {
+                msg = await client.createMessage(options.channel.id, text, ...files)
+            } else {
+                msg = await client.createMessage(options.channel.id, `**${options.author.username}**, ${text}`);
+            }
+            return msg
+        }
         this.dbBot = options.bot;
-        this.dbGuild = options.guild;
-        this.CharlotteEmbed = options.CharlotteEmbed
+        this.dbGuild = options.guildDB;
         this.getUserAt = function (arg, guildOnly) {
-
-            let args = options.message.content.slice(options.prefix.lenght).trim().split(/ +/g).slice(1)
+            let args = options.content.slice(options.prefix.lenght).trim().split(/ +/g).slice(1)
             if (args[arg]){
-                let user = guildOnly ? options.message.guild.members.resolveID(args[arg].replace(/[<>!@]/g, '')) : client.users.fetch(args[arg].replace(/[<>!@]/g, ''));
-                if (user) 
+                let user = guildOnly ? options.guild.members.get(args[arg].replace(/[<>!@]/g, '')) : client.users.get(args[arg].replace(/[<>!@]/g, ''));
+                if (user)
                     return user
-                else 
+                else
                     return null
-            }else 
+            }else
                 return null
         }
     }
