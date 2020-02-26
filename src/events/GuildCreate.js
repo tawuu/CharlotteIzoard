@@ -1,6 +1,6 @@
 const EventHandler = require('../structures/EventHandler');
 const chalk = require('chalk')
-const { CharlotteEmbed } = require("../utils")
+
 const i18next = require("i18next")
 
 module.exports = class guildCreate extends EventHandler {
@@ -9,25 +9,35 @@ module.exports = class guildCreate extends EventHandler {
     }
     run(guild) {
         let t = i18next.getFixedT(this.getLocaleLanguage(guild.region))
+        guild.getAuditLogs(3, null, 28).then(a => {
 
-        guild.fetchAuditLogs({
-            type: "BOT_ADD"
-        }).then(a => {
+            let b = a.entries[0]
+            let user = b.user
 
-            let b = a.entries.filter(a => a.target.id === this.client.user.id).first()
-            let user = b.executor
-            let thanksEmbed = new CharlotteEmbed()
-                .setColor("RANDOM")
-                .setDescription(t("events:guildCreated.thanksForAdded", {
-                    name: `**${this.client.user.tag}**`,
-                    server: `**${guild.name}**`,
-                    user: `**${user.tag}**`,
-                    prefix: `-`
-                }))
-                .setAuthor(user.tag, user.displayAvatarURL())
-                .setThumbnail(this.client.user.displayAvatarURL())
-            user.send(thanksEmbed).catch(err => {
-                console.log(chalk.red(`Eu não consegui enviar a mensagem para o ${chalk.blue(user.tag)}`))
+            user.getDMChannel().then(channel => {
+                console.log(channel.id)
+                channel.createMessage({
+                    embed: {
+                        description: t("events:guildCreated.thanksForAdded", {
+                            name: `**${this.client.user.tag}**`,
+                            server: `**${guild.name}**`,
+                            user: `**${user.tag}**`,
+                            prefix: `-`
+                        }),
+                        author: {
+                            name: user.tag,
+                            icon_url: user.avatarURL
+                        },
+                        thumbnail: {
+                            url: this.client.user.avatarURL
+                        },
+                        color: "#ff3df8".toVBColor()
+                    }
+                }).catch(err => {
+                    console.log(chalk.red(`Eu não consegui enviar a mensagem para o ${chalk.blue(user.tag)} `))
+                })
+            }).catch(err => {
+                console.log("Não consegui acessar o DM Channel")
             })
             
         }).catch(() => {
