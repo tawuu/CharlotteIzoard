@@ -1,24 +1,29 @@
-const { Client } = require('discord.js');
+const {Client:ErisClient} = require("eris");
+const Loaders = require("./loaders")
 
-module.exports = class CharlotteClient extends Client {
-    constructor(options = {}) {
-        super(options);
+module.exports = class Client extends ErisClient {
+    constructor(token, options = {}) {
+        super(token, options)
+
+        this.utils = require("./utils")
+
         this.initializeLoaders()
     }
-    login (token) {
-        super.login(token);
+    connect() {
+        super.connect()
         return this;
     }
-
-    initializeLoaders () {
-        const Loaders = require('./loaders');
-        for (let name in Loaders) {
-            try {
-                let Loader = new Loaders[name](this);
-                Loader.load()
-            } catch(err) {
-                console.error(err)
+    logError(err) {
+        return console.error(err)
+    }
+    async initializeLoaders () {
+        try {
+            for (let name in Loaders) {
+                const Loader = new Loaders[name](this)
+                await Loader.load()
             }
+        } catch(err) {
+            this.logError(err)
         }
     }
 }
