@@ -37,11 +37,16 @@
         "mutedSucessfully": "O usuario foi mutado com sucesso !",
         "cannotMute": "Não foi possivel mutar o usuario"
     },
+    "purge":{
+        "purgedUserSucessfully": "Foram limpadas um total de **{{amount}}** mensagens do **{{user}}**",
+        "purgedSucessfully": "Foram limpadas um total de **{{amount}}** mensagens",
+        "invalidNumber": "Indique um numero valido para continuar..."
+    },
     "botinfo": {
         "myPrefix":"Meu prefixo neste servidor é `{{prefix}}`",
         "createdBy": "Eu fui criada e desenvolvida por {{owners}}",
         "clickhere": "[Clique aqui]({{url}})",
-        "aboutMe": "Olá, meu nome é **{{name}}** e eu sou somente mais um outro bot no discord... \n\nEu fui desenvolvida em **JavaScript**, utilizando a biblioteca **discord.js - {{version}}**, Eu fui criada por **{{owner}}**, eu tenho um total de **{{commands}}** comandos e atualmente eu conheco um total de **{{users}}** usuarios em um total de **{{servers}}** servidores "
+        "aboutMe": "Olá, meu nome é **{{name}}** e eu sou somente mais um outro bot no discord... \n\nEu fui desenvolvida em **JavaScript**, utilizando a biblioteca **Eris - {{version}}**, Eu fui criada por **{{owner}}**, eu tenho um total de **{{commands}}** comandos e atualmente eu conheco um total de **{{users}}** usuarios em um total de **{{servers}}** servidores "
     },
     "translate": {
         "missingLanguage": "Indique uma linguagem qual você deseja traduzir",
