@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "nodemon index.js --ignore src/commands ",
     "start": "node index.js"
   },
   "repository": {
@@ -18,14 +18,15 @@
     "url": "https://github.com/ItzNerd/CharlotteIzoard/issues"
   },
   "homepage": "https://github.com/ItzNerd/CharlotteIzoard#readme",
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
   "dependencies": {
     "canvas": "^2.6.1",
     "chalk": "^3.0.0",
     "cheerio": "^1.0.0-rc.3",
-    "crowdin-without-vulnerability": "^1.0.0",
-    "discord.js": "github:discordjs/discord.js#master",
     "dotenv": "^8.2.0",
+    "eris": "^0.11.2",
     "express": "^4.17.1",
     "i18next": "^19.0.3",
     "i18next-node-fs-backend": "^2.1.3",
