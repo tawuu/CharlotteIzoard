@@ -18,5 +18,12 @@ module.exports = class Proptypes {
                 return `${this.username}#${this.discriminator}`;
             }
         });
+
+        String.prototype.toVBColor = function HEXToVBColor() {
+            let str = this;
+            str = str.replace(/#/g, '')
+            var bbggrr = str.substr(4, 2) + str.substr(2, 2) + str.substr(0, 2);
+            return parseInt(bbggrr, 16);
+        }
     }
 }
