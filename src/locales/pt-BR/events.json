@@ -4,5 +4,8 @@
     "thanksForAdded": "Olá {{user}}, eu sou a {{name}}, Muito obrigado por me adicionar no {{server}} (pelo menos eu acho que foi você que me adicionou)! \n\nMas então, eu sou um bot multifunções, com muitos jogos, e muitos comandos divertidos para alegrar seu servidor!\n\nSe quiser saber quais são meus comandos, digite `{{prefix}}ajuda`, e se estiver com dificuldades com minhas funções, entre em meu servidor de suporte digitando `{{prefix}}suporte`.\n\nE mais uma vez, OBRIGADAAA por me adicionar. "
   },
   "mention": "Olá eu sou a Charlotte. Meu prefixo é `{{prefix}}`, digite `{{prefix}}help` para mais ajuda :)",
-  "commandWithMaintenance": "Este comando está em manutenção devido: **{{reason}}**"
+  "commandWithMaintenance": "Este comando está em manutenção devido: **{{reason}}**",
+  "unavailableCommand": "Desculpe-me! O comando `{{command}}` não existe, {{subtext}}",
+  "didyouMean": "Será que você não quis dizer `{{command}}`...?",
+  "tryHelp": "Tente digitar `-help` para mais ajuda !"
 }

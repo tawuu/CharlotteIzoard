@@ -5,6 +5,13 @@ let guildSettings = {
         type: String,
         default: "pt-BR"
     },
+    prefix: {
+        type: String,
+    },
+    unavailableCommand: {
+        type: Boolean,
+        default: false
+    }
 }
 module.exports = new Schema({
     _id: {
