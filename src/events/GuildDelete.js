@@ -5,6 +5,6 @@ module.exports = class guildDelete extends EventHandler {
         super(client, 'guildDelete')
     }
     async run(guild) {
-        await this.client.database.findByIdAndDelete(guild.id)
+        await this.client.database.guilds.findByIdAndDelete(guild.id)
     }
 }
