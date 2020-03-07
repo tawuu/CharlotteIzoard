@@ -9,6 +9,14 @@ module.exports = class guildCreate extends EventHandler {
     }
     run(guild) {
         let t = i18next.getFixedT(this.getLocaleLanguage(guild.region))
+        let guildDB = await this.client.database.guilds.findById(guild.id);
+        if (!guildDB) {
+            guildDB = new this.client.database.guilds({
+                _id: guild.id
+            }).save()
+        }
+
+
         guild.getAuditLogs(3, null, 28).then(a => {
 
             let b = a.entries[0]
