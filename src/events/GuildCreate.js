@@ -7,7 +7,7 @@ module.exports = class guildCreate extends EventHandler {
     constructor(client) {
         super(client, 'guildCreate')
     }
-    run(guild) {
+    async run(guild) {
         let t = i18next.getFixedT(this.getLocaleLanguage(guild.region))
         let guildDB = await this.client.database.guilds.findById(guild.id);
         if (!guildDB) {
